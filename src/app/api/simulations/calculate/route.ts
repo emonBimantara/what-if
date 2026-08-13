@@ -1,11 +1,14 @@
 import { calculateSimulation } from "@/lib/financial";
+import prisma from "@/lib/prisma";
 import { simulationSchema } from "@/lib/validation";
 import { ZodError } from "zod";
 
 export async function POST(request: Request) {
-    const body = await request.json();
-
+    const simulations = await prisma.simulation.findMany();
+    console.log("Simulations:", simulations);
+    
     try {
+        const body = await request.json();
         const validatedBody = simulationSchema.parse(body);
 
         const results = validatedBody.scenarios.map((scenario) => {

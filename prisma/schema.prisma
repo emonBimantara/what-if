@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Simulation {
+  id             String   @id @default(cuid())
+  income         Float
+  expense        Float
+  simulationName String
+  category       String
+  createdAt      DateTime @default(now())
+  scenarios Scenario[]
+}
+
+model Scenario {
+  id       String @id @default(cuid())
+  name     String
+  price    Float
+  dp       Float
+  tenor    Int
+  interest Float
+
+  simulationId String
+  simulation Simulation @relation(fields: [simulationId], references: [id])
+}
