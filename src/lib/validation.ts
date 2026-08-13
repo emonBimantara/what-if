@@ -9,6 +9,7 @@ export const scenarioSchema = z.object({
     tenor: z.number(),
     interest: z.number(),
 });
+export type Scenario = z.infer<typeof scenarioSchema>;
 
 export const simulationSchema = z.object({
   income: z.number(),

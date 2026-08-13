@@ -1,7 +1,11 @@
+import { Scenario } from "./validation";
+
+//jumlah pokok utang murni 
 export function calculateLoanAmount(price: number, dp: number): number {
-    return price - dp
+    return price - dp;
 }
 
+//bunga per tahun (annualInterest) + total bunga selama masa tenor (totalInterest).
 export function calculateTotalInterest(
     loanAmount: number,
     tenor: number,
@@ -10,9 +14,10 @@ export function calculateTotalInterest(
     const annualInterest = loanAmount * (annualInterestRate / 100);
     const totalInterest = annualInterest * tenor / 12;
 
-    return { annualInterest, totalInterest }
+    return { annualInterest, totalInterest };
 }
 
+// cicilan yang harus dibayar setiap bulan
 export function calculateMonthlyPayment(
     loanAmount: number,
     tenor: number,
@@ -29,6 +34,7 @@ export function calculateMonthlyPayment(
     return monthlyPayment;
 }
 
+// total keseluruhan hutang yang harus dibayar
 export function calculateTotalPayment(
     loanAmount: number,
     tenor: number,
@@ -45,15 +51,17 @@ export function calculateTotalPayment(
     return totalPayment;
 }
 
+// sisa uang bersih bulanan
 export function calculateRemainingCashFlow(
     income: number,
     expense: number,
     monthlyPayment: number
 ) {
-    const monthlyCashFlow = income - expense - monthlyPayment
+    const monthlyCashFlow = income - expense - monthlyPayment;
     return monthlyCashFlow;
 }
 
+// rasio beban utang
 export function calculateBurdenRatio(
     monthlyPayment: number,
     income: number
@@ -62,6 +70,7 @@ export function calculateBurdenRatio(
     return burdenRatio;
 }
 
+// status beban keuangan
 export function calculateBurdenLevel(
     burdenRatio: number
 ) {
@@ -72,4 +81,58 @@ export function calculateBurdenLevel(
     } else {
         return "LOW";
     }
+}
+
+// hitung simulasi pengeluaran
+export function calculateSimulation(
+    income: number,
+    expense: number,
+    scenario: Scenario
+) {
+    const loanAmount = calculateLoanAmount(
+        scenario.price,
+        scenario.dp
+    );
+
+    const { totalInterest } = calculateTotalInterest(
+        loanAmount,
+        scenario.tenor,
+        scenario.interest
+    );
+
+    const totalPayment = calculateTotalPayment(
+        loanAmount,
+        scenario.tenor,
+        scenario.interest
+    );
+
+    const monthlyPayment = calculateMonthlyPayment(
+        loanAmount,
+        scenario.tenor,
+        scenario.interest
+    );
+
+    const remainingCashFlow = calculateRemainingCashFlow(
+        income,
+        expense,
+        monthlyPayment
+    );
+
+    const burdenRatio = calculateBurdenRatio(
+        monthlyPayment,
+        income
+    );
+
+    const burdenLevel = calculateBurdenLevel(burdenRatio);
+
+    return {
+        name: scenario.name,
+        loanAmount,
+        totalInterest,
+        totalPayment,
+        monthlyPayment,
+        remainingCashFlow,
+        burdenRatio,
+        burdenLevel,
+    };
 }
