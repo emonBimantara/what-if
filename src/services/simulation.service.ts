@@ -52,3 +52,25 @@ export async function getSimulations() {
         }
     })
 }
+
+export async function updateSimulation(
+    id: string,
+    data: { simulationName: string }
+) {
+    return prisma.simulation.update({
+        where: {
+            id
+        },
+        data: {
+            simulationName: data.simulationName
+        }
+    })
+}
+
+export async function deleteSimulation(id: string) {
+    return prisma.simulation.delete({
+        where: {
+            id
+        }
+    })
+}
