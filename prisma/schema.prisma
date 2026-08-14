@@ -8,13 +8,13 @@ datasource db {
 }
 
 model Simulation {
-  id             String   @id @default(cuid())
+  id             String     @id @default(cuid())
   income         Float
   expense        Float
   simulationName String
   category       String
-  createdAt      DateTime @default(now())
-  scenarios Scenario[]
+  createdAt      DateTime   @default(now())
+  scenarios      Scenario[]
 }
 
 model Scenario {
@@ -26,5 +26,5 @@ model Scenario {
   interest Float
 
   simulationId String
-  simulation Simulation @relation(fields: [simulationId], references: [id])
+  simulation   Simulation @relation(fields: [simulationId], references: [id], onDelete: Cascade)
 }
