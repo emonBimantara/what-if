@@ -52,13 +52,6 @@ export default function Navbar() {
           >
             Masuk
           </Link>
-          <Link
-            href="/simulator"
-            className="inline-flex items-center gap-1.5 rounded-md bg-zinc-900 hover:bg-zinc-800 active:scale-[0.99] px-3.5 py-1.5 text-xs font-semibold text-white transition-all duration-150 shadow-sm"
-          >
-            Mulai Simulasi
-            <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
         </div>
 
         <button
