@@ -9,7 +9,8 @@ export const scenarioSchema = z.object({
     tenor: z.number(),
     interest: z.number(),
 });
-export type Scenario = z.infer<typeof scenarioSchema>;
+//dengan zod, langsung bisa bikin types interface nya otomatis
+export type Scenario = z.infer<typeof scenarioSchema>; 
 
 export const simulationSchema = z.object({
   income: z.number(),
@@ -18,3 +19,4 @@ export const simulationSchema = z.object({
   category: z.string(),
   scenarios: z.array(scenarioSchema)
 });
+export type SimulationType = z.infer<typeof simulationSchema>
