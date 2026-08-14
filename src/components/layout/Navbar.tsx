@@ -10,7 +10,6 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-zinc-200/90 bg-[#fafaf9]/95 backdrop-blur-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
-        {/* Brand Logo & Editorial Signature */}
         <Link href="/" className="flex items-center gap-3 group">
           <div className="flex h-8 w-8 items-center justify-center rounded-md bg-zinc-900 text-white font-bold text-xs tracking-tight shadow-sm font-mono">
             W/I
@@ -25,7 +24,6 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-1">
           <Link
             href="/"
@@ -47,11 +45,7 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        {/* Desktop Auth CTAs & Metadata */}
         <div className="hidden md:flex items-center gap-3">
-          <span className="text-[10px] font-mono text-zinc-400 border border-zinc-200 px-2 py-0.5 rounded select-none">
-            REF: W-01
-          </span>
           <Link
             href="/login"
             className="px-3 py-1.5 text-xs font-semibold text-zinc-700 hover:text-zinc-900 transition-colors duration-150"
@@ -67,7 +61,6 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile menu toggle */}
         <button
           type="button"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -78,7 +71,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Drawer */}
       {isMobileMenuOpen && (
         <div className="md:hidden border-b border-zinc-200 bg-white px-4 pt-2 pb-6 space-y-3">
           <nav className="flex flex-col space-y-1">

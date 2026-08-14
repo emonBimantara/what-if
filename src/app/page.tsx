@@ -6,18 +6,10 @@ import Badge from "@/components/ui/Badge";
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen bg-[#fafaf9]">
-      {/* HERO SECTION WITH SUBTLE FINANCIAL GRID */}
       <section className="relative overflow-hidden py-16 md:py-24 border-b border-zinc-200 bg-financial-grid">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Content */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2">
-                <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-600 bg-white border border-zinc-200 px-2.5 py-1 rounded">
-                  01 — FINANCIAL DECISION SIMULATOR
-                </span>
-              </div>
-
               <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-zinc-900 leading-[1.1]">
                 What if you made this financial decision?
               </h1>
@@ -53,14 +45,12 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Right Static Financial Composition Mockup */}
             <div className="lg:col-span-5">
               <div className="rounded-lg border border-zinc-300 bg-white p-5 shadow-sm space-y-4 font-mono text-xs relative">
                 <div className="flex items-center justify-between border-b border-zinc-200 pb-2.5">
                   <span className="font-bold text-zinc-900 tracking-wider text-[11px] uppercase">
-                    [ WORKSHEET PREVIEW ]
+                    [ PREVIEW ]
                   </span>
-                  <span className="text-[10px] text-zinc-400">REF: SIM-HRV</span>
                 </div>
 
                 <div className="space-y-3">
@@ -98,13 +88,9 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* CONCEPT SECTION WITH NUMBERED INDEXING */}
       <section className="py-16 bg-[#fafaf9] border-b border-zinc-200">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 space-y-10">
           <div className="space-y-1">
-            <span className="text-xs font-mono uppercase tracking-widest text-zinc-500 block">
-              METHODOLOGY
-            </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 tracking-tight">
               3 Langkah Membandingkan Masa Depan Finansial
             </h2>
@@ -138,23 +124,14 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* DECISION CATEGORIES */}
       <section className="py-16 bg-white border-b border-zinc-200">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div className="space-y-1">
-              <span className="text-xs font-mono uppercase tracking-widest text-zinc-500 block">
-                USE CASES
-              </span>
               <h2 className="text-2xl font-bold text-zinc-900 tracking-tight">
                 Simulasi untuk Berbagai Kebutuhan Finansial
               </h2>
             </div>
-            <Link href="/simulator">
-              <Button variant="outline" size="sm">
-                Buka Simulator <ArrowRight className="h-3.5 w-3.5" />
-              </Button>
-            </Link>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 text-xs">
@@ -189,26 +166,6 @@ export default function LandingPage() {
                 Gunakan simulator untuk dana pendidikan, renovasi rumah, atau investasi bisnis pribadi.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FOOTER CTA */}
-      <section className="py-16 bg-[#fafaf9]">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center space-y-5">
-          <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 tracking-tight">
-            Siap melihat konsekuensi keputusan finansialmu?
-          </h2>
-          <p className="text-xs sm:text-sm text-zinc-600 max-w-lg mx-auto">
-            Coba simulator sekarang dan dapatkan gambaran objektif mengenai beban cicilan dan tingkat risiko.
-          </p>
-          <div>
-            <Link href="/simulator">
-              <Button variant="primary" size="lg" className="font-semibold">
-                Mulai Simulasi Sekarang
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
           </div>
         </div>
       </section>

@@ -4,24 +4,52 @@ import { simulationSchema } from "@/lib/validation";
 import { ZodError } from "zod";
 
 export async function POST(request: Request) {
-    const simulations = await prisma.simulation.findMany();
-    console.log("Simulations:", simulations);
-    
     try {
         const body = await request.json();
         const validatedBody = simulationSchema.parse(body);
 
-        const results = validatedBody.scenarios.map((scenario) => {
-            return calculateSimulation(
-                validatedBody.income,
-                validatedBody.expense,
-                scenario
-            );
-        });
+        const result = await prisma.$transaction(async (tx) => {
+            const simulation = await tx.simulation.create({
+                data: {
+                    income: validatedBody.income,
+                    expense: validatedBody.expense,
+                    simulationName: validatedBody.simulationName,
+                    category: validatedBody.category,
+                },
+            })
+
+            const results = await Promise.all(
+                validatedBody.scenarios.map(async (scenario) => {
+                    const result = calculateSimulation(
+                        validatedBody.income,
+                        validatedBody.expense,
+                        scenario
+                    );
+
+                    await tx.scenario.create({
+                        data: {
+                            name: scenario.name,
+                            price: scenario.price,
+                            dp: scenario.dp,
+                            tenor: scenario.tenor,
+                            interest: scenario.interest,
+                            simulationId: simulation.id,
+                        },
+                    });
+
+                    return result;
+                })
+            )
+
+            return {
+                simulation,
+                results,
+            };
+        })
 
         return Response.json({
             message: "Simulation calculated",
-            results,
+            ...result,
         });
     } catch (error) {
         if (error instanceof ZodError) {
@@ -34,4 +62,14 @@ export async function POST(request: Request) {
             error: "Internal server error",
         }, { status: 500 });
     }
+}
+
+export async function GET(){
+    const simulations = await prisma.simulation.findMany({
+        include: {
+            scenarios: true
+        }
+    })
+
+    return Response.json({simulations})
 }
