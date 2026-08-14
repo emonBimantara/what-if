@@ -1,3 +1,5 @@
+import { Prisma } from "@/generated/prisma/client";
+import { NotFoundError } from "@/lib/errors";
 import { calculateSimulation } from "@/lib/financial";
 import prisma from "@/lib/prisma";
 import type { SimulationType } from "@/lib/validation";
@@ -57,20 +59,42 @@ export async function updateSimulation(
     id: string,
     data: { simulationName: string }
 ) {
-    return prisma.simulation.update({
-        where: {
-            id
-        },
-        data: {
-            simulationName: data.simulationName
+    try {
+        return await prisma.simulation.update({
+            where: {
+                id,
+            },
+            data: {
+                simulationName: data.simulationName,
+            },
+        });
+    } catch (error) {
+        if (
+            error instanceof Prisma.PrismaClientKnownRequestError &&
+            error.code === "P2025"
+        ) {
+            throw new NotFoundError("Simulation not found");
         }
-    })
+
+        throw error;
+    }
 }
 
 export async function deleteSimulation(id: string) {
-    return prisma.simulation.delete({
-        where: {
-            id
+    try {
+        return await prisma.simulation.delete({
+            where: {
+                id,
+            },
+        });
+    } catch (error) {
+        if (
+            error instanceof Prisma.PrismaClientKnownRequestError &&
+            error.code === "P2025"
+        ) {
+            throw new NotFoundError("Simulation not found");
         }
-    })
+
+        throw error;
+    }
 }
