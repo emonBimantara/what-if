@@ -1,8 +1,10 @@
-import { calculateSimulation } from "@/lib/financial";
 import prisma from "@/lib/prisma";
 import { simulationSchema } from "@/lib/validation";
 import { ZodError } from "zod";
-import { createSimulation } from "@/services/simulation.service";
+import {
+    createSimulation,
+    getSimulations,
+} from "@/services/simulation.service";
 
 export async function POST(request: Request) {
     try {
@@ -27,12 +29,7 @@ export async function POST(request: Request) {
     }
 }
 
-export async function GET(){
-    const simulations = await prisma.simulation.findMany({
-        include: {
-            scenarios: true
-        }
-    })
-
-    return Response.json({simulations})
+export async function GET() {
+    const simulations = await getSimulations()
+    return Response.json({ simulations })
 }

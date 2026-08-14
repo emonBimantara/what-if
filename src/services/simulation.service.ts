@@ -44,3 +44,11 @@ export async function createSimulation(data: SimulationType) {
 
     return result;
 }
+
+export async function getSimulations() {
+    return prisma.simulation.findMany({
+        include: {
+            scenarios: true
+        }
+    })
+}
