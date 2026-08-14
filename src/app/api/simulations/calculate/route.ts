@@ -1,6 +1,5 @@
-import prisma from "@/lib/prisma";
+import { handleApiError } from "@/lib/api-error";
 import { simulationSchema } from "@/lib/validation";
-import { ZodError } from "zod";
 import {
     createSimulation,
     getSimulations,
@@ -17,19 +16,18 @@ export async function POST(request: Request) {
             ...result,
         });
     } catch (error) {
-        if (error instanceof ZodError) {
-            return Response.json({
-                error: "Validation failed",
-                details: error.issues,
-            }, { status: 400 })
-        }
-        return Response.json({
-            error: "Internal server error",
-        }, { status: 500 });
+        return handleApiError(error);
     }
 }
 
 export async function GET() {
-    const simulations = await getSimulations()
-    return Response.json({ simulations })
+    try {
+        const simulations = await getSimulations();
+
+        return Response.json({
+            simulations,
+        });
+    } catch (error) {
+        return handleApiError(error);
+    }
 }
