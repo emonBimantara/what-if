@@ -5,6 +5,7 @@ type Simulation = {
     simulationName: string;
     category: string;
     createdAt: string;
+
     scenarios: {
         id: string;
         name: string;
@@ -12,8 +13,21 @@ type Simulation = {
         dp: number;
         tenor: number;
         interest: number;
+
+        loanAmount: number;
+        totalInterest: number;
+        totalPayment: number;
+        monthlyPayment: number;
+        remainingCashFlow: number;
+        burdenRatio: number;
+        burdenLevel: string;
+
         simulationId: string;
     }[];
+};
+
+type SimulationDetailResponse = {
+    simulation: Simulation;
 };
 
 export async function getSimulations(): Promise<{ simulations: Simulation[] }> {
@@ -26,10 +40,12 @@ export async function getSimulations(): Promise<{ simulations: Simulation[] }> {
     return respData
 }
 
-export async function getSimulationById(id: string) {
-    const resp = await fetch(`http://localhost:3000/api/simulations/${id}`)
+export async function getSimulationById(
+    id: string
+): Promise<SimulationDetailResponse> {
+    const resp = await fetch(`http://localhost:3000/api/simulations/${id}`);
     if (!resp.ok) {
-        throw new Error("Failed to fetch simulations");
+        throw new Error("Failed to fetch simulation");
     }
 
     const respData = await resp.json();
