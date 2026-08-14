@@ -25,6 +25,14 @@ model Scenario {
   tenor    Int
   interest Float
 
+  loanAmount        Float
+  totalInterest     Float
+  totalPayment      Float
+  monthlyPayment    Float
+  remainingCashFlow Float
+  burdenRatio       Float
+  burdenLevel       String
+
   simulationId String
   simulation   Simulation @relation(fields: [simulationId], references: [id], onDelete: Cascade)
 }

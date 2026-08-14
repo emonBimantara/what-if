@@ -2,12 +2,24 @@ import Link from "next/link";
 import { ArrowLeft, Share2, Download, Sliders, AlertTriangle, CheckCircle2, Info } from "lucide-react";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
+import { getSimulationById } from "@/lib/api/simulations";
 
-export default function SimulationDetailPage() {
+type SimulationDetailPageProps = {
+  params: Promise<{
+    id: string;
+  }>;
+};
+
+export default async function SimulationDetailPage({ params }: SimulationDetailPageProps) {
+  const { id } = await params;
+  const respData = await getSimulationById(id);
+  const simulation = respData.simulation;
+
+  console.log("SCENARIOS:", simulation.scenarios);
+
   return (
     <div className="py-8 sm:py-12 bg-[#fafaf9] min-h-screen">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 space-y-8">
-        {/* Navigation & Report Header */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <Link
@@ -16,19 +28,16 @@ export default function SimulationDetailPage() {
             >
               <ArrowLeft className="h-4 w-4" /> Kembali ke Daftar Simulasi
             </Link>
-            <span className="text-[11px] font-mono text-zinc-400">
-              REPORT REF: #SIM-84920
-            </span>
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-200 pb-6">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <Badge variant="indigo">Kategori: Kendaraan</Badge>
+                <Badge variant="indigo">Kategori: {simulation.category}</Badge>
                 <Badge variant="amber">Status: Risiko Moderat</Badge>
               </div>
               <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
-                Laporan Hasil Simulasi: Pembelian Honda HR-V
+                Laporan Hasil Simulasi: {simulation.simulationName}
               </h1>
               <p className="text-xs sm:text-sm text-zinc-600">
                 Analisis rasio beban pembiayaan terhadap kapasitas arus kas bulanan.

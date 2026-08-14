@@ -23,6 +23,15 @@ export async function getSimulations(): Promise<{ simulations: Simulation[] }> {
     }
 
     const respData = await resp.json()
-
     return respData
+}
+
+export async function getSimulationById(id: string) {
+    const resp = await fetch(`http://localhost:3000/api/simulations/${id}`)
+    if (!resp.ok) {
+        throw new Error("Failed to fetch simulations");
+    }
+
+    const respData = await resp.json();
+    return respData;
 }

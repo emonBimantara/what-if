@@ -30,6 +30,13 @@ export async function createSimulation(data: SimulationType) {
                         dp: scenario.dp,
                         tenor: scenario.tenor,
                         interest: scenario.interest,
+                        loanAmount: result.loanAmount,
+                        totalInterest: result.totalInterest,
+                        totalPayment: result.totalPayment,
+                        monthlyPayment: result.monthlyPayment,
+                        remainingCashFlow: result.remainingCashFlow,
+                        burdenRatio: result.burdenRatio,
+                        burdenLevel: result.burdenLevel,  
                         simulationId: simulation.id,
                     },
                 });
@@ -57,14 +64,16 @@ export async function getSimulations() {
 
 export async function getSimulationById(id: string) {
     try {
-        return await prisma.simulation.findUniqueOrThrow({
-            where:{
-                id
+        const simulation = await prisma.simulation.findUniqueOrThrow({
+            where: {
+                id,
             },
-            include:{
-                scenarios: true
-            }
-        })
+            include: {
+                scenarios: true,
+            },
+        });
+
+        return simulation;
     } catch (error) {
         if (
             error instanceof Prisma.PrismaClientKnownRequestError &&
