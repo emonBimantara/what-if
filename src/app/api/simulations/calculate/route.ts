@@ -1,9 +1,6 @@
 import { handleApiError } from "@/lib/api-error";
 import { simulationSchema } from "@/lib/validation";
-import {
-    createSimulation,
-    getSimulations,
-} from "@/services/simulation.service";
+import { createSimulation } from "@/services/simulation.service";
 
 export async function POST(request: Request) {
     try {
@@ -14,18 +11,6 @@ export async function POST(request: Request) {
         return Response.json({
             message: "Simulation calculated",
             ...result,
-        });
-    } catch (error) {
-        return handleApiError(error);
-    }
-}
-
-export async function GET() {
-    try {
-        const simulations = await getSimulations();
-
-        return Response.json({
-            simulations,
         });
     } catch (error) {
         return handleApiError(error);

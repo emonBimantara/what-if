@@ -1,5 +1,6 @@
 import {
     deleteSimulation,
+    getSimulationById,
     updateSimulation,
 } from "@/services/simulation.service";
 import { handleApiError } from "@/lib/api-error";
@@ -39,5 +40,21 @@ export async function DELETE(
         });
     } catch (error) {
         return handleApiError(error);
+    }
+}
+
+export async function GET(
+    request: Request,
+    { params }: { params: Promise<{ id: string }> }
+) {
+    try {
+        const { id } = await params
+        const simulation = await getSimulationById(id)
+
+        return Response.json({
+            simulation
+        })
+    } catch (error) {
+        return handleApiError(error)
     }
 }

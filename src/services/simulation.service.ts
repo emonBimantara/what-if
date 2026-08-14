@@ -55,6 +55,28 @@ export async function getSimulations() {
     })
 }
 
+export async function getSimulationById(id: string) {
+    try {
+        return await prisma.simulation.findUniqueOrThrow({
+            where:{
+                id
+            },
+            include:{
+                scenarios: true
+            }
+        })
+    } catch (error) {
+        if (
+            error instanceof Prisma.PrismaClientKnownRequestError &&
+            error.code === "P2025"
+        ) {
+            throw new NotFoundError("Simulation not found");
+        }
+
+        throw error;
+    }
+}
+
 export async function updateSimulation(
     id: string,
     data: { simulationName: string }
