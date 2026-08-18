@@ -1,13 +1,17 @@
 import Input from "@/components/ui/Input";
 
 export interface FinancialInputProps {
-  defaultIncome?: string;
-  defaultExpense?: string;
+  income: string;
+  expense: string;
+  onIncomeChange: (value: string) => void;
+  onExpenseChange: (value: string) => void;
 }
 
 export default function FinancialInput({
-  defaultIncome = "12.000.000",
-  defaultExpense = "6.000.000",
+  income,
+  expense,
+  onIncomeChange,
+  onExpenseChange,
 }: FinancialInputProps) {
   return (
     <div className="rounded-lg border border-zinc-200 bg-white p-5 sm:p-6 space-y-4">
@@ -22,19 +26,21 @@ export default function FinancialInput({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <Input
-          label="Penghasilan Bulanan (Take-Home Pay)"
+          label="Penghasilan Bulanan"
           prefixText="Rp"
-          placeholder="10.000.000"
-          defaultValue={defaultIncome}
+          value={income}
+          onChange={(e) => onIncomeChange(e.target.value)}
           helperText="Gaji bersih, bonus, atau pendapatan rutin"
+          required
         />
 
         <Input
           label="Pengeluaran Bulanan Rutin"
           prefixText="Rp"
-          placeholder="5.000.000"
-          defaultValue={defaultExpense}
+          value={expense}
+          onChange={(e) => onExpenseChange(e.target.value)}
           helperText="Biaya hidup rutin, makan, utilitas, cicilan aktif"
+          required
         />
       </div>
     </div>
