@@ -69,10 +69,6 @@ export default function SignupPage() {
             </Link>
           </div>
         </div>
-
-        <div className="text-center text-[11px] text-zinc-500 bg-zinc-100 p-2.5 rounded border border-zinc-200">
-          🔒 Interface Prototype — Form statis tanpa autentikasi backend.
-        </div>
       </div>
     </div>
   );

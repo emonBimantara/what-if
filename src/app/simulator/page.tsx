@@ -1,6 +1,9 @@
 import { Suspense } from "react";
 import { Loader2 } from "lucide-react";
 import SimulatorForm from "@/components/simulator/SimulatorForm";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth/auth";
 
 function FormLoadingFallback() {
   return (
@@ -11,7 +14,14 @@ function FormLoadingFallback() {
   );
 }
 
-export default function SimulatorPage() {
+export default async function SimulatorPage() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    redirect("/login");
+  }
   return (
     <div className="py-8 sm:py-12 bg-[#fafaf9] min-h-screen">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 space-y-8">

@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth";
+import { auth } from "@/lib/auth/auth";
 import { handleApiError } from "@/lib/api-error";
 import { simulationSchema } from "@/lib/validation";
 import { createSimulation } from "@/services/simulation.service";

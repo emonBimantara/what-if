@@ -1,6 +1,15 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  if (pathname === "/login" || pathname === "/signup") {
+    return null;
+  }
+
   return (
     <footer className="border-t border-zinc-200 bg-[#f4f4f5] text-zinc-600 text-xs">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">

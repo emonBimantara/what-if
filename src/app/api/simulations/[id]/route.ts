@@ -5,7 +5,7 @@ import {
 } from "@/services/simulation.service";
 import { handleApiError } from "@/lib/api-error";
 import { updateSimulationSchema } from "@/lib/validation";
-import { auth } from "@/lib/auth";
+import { auth } from "@/lib/auth/auth";
 
 export async function PATCH(
     request: Request,

@@ -2,10 +2,26 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { authClient } from "@/lib/auth/auth-client";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+  const { data: session, isPending } = authClient.useSession();
+
+  async function handleLogout() {
+    await authClient.signOut();
+
+    setIsUserMenuOpen(false);
+    setIsMobileMenuOpen(false);
+
+    router.push("/login");
+    router.refresh();
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-zinc-200/90 bg-[#fafaf9]/95 backdrop-blur-sm">
@@ -46,12 +62,47 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
-          <Link
-            href="/login"
-            className="px-3 py-1.5 text-xs font-semibold text-zinc-700 hover:text-zinc-900 transition-colors duration-150"
-          >
-            Masuk
-          </Link>
+          {isPending ? null : session ? (
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setIsUserMenuOpen((prev) => !prev)}
+                className="flex items-center gap-2 px-3 py-1.5 text-xs font-semibold text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100 rounded-md transition-colors"
+              >
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-900 text-white text-[10px] font-bold">
+                  {session.user.name.charAt(0).toUpperCase()}
+                </div>
+
+                <span>{session.user.name}</span>
+
+                <ChevronDown
+                  className={`h-3.5 w-3.5 transition-transform ${isUserMenuOpen ? "rotate-180" : ""
+                    }`}
+                />
+              </button>
+
+              {isUserMenuOpen && (
+                <div className="absolute right-0 top-full pt-2">
+                  <div className="w-40 rounded-md border border-zinc-200 bg-white p-1 shadow-md">
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="w-full rounded px-3 py-2 text-left text-xs font-medium text-zinc-700 hover:bg-zinc-100"
+                    >
+                      Keluar
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link
+              href="/login"
+              className="px-3 py-1.5 text-xs font-semibold text-zinc-700 hover:text-zinc-900 transition-colors duration-150"
+            >
+              Masuk
+            </Link>
+          )}
         </div>
 
         <button
@@ -91,20 +142,50 @@ export default function Navbar() {
           </nav>
 
           <div className="pt-3 border-t border-zinc-200 flex flex-col gap-2">
-            <Link
-              href="/login"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full text-center px-4 py-2 text-xs font-semibold text-zinc-800 bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 rounded-md"
-            >
-              Masuk
-            </Link>
-            <Link
-              href="/signup"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full text-center px-4 py-2 text-xs font-semibold text-white bg-zinc-900 hover:bg-zinc-800 rounded-md"
-            >
-              Daftar Akun
-            </Link>
+            {isPending ? null : session ? (
+              <>
+                <div className="flex items-center gap-2 px-3 py-2">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-white text-xs font-bold">
+                    {session.user.name.charAt(0).toUpperCase()}
+                  </div>
+
+                  <div>
+                    <p className="text-xs font-semibold text-zinc-900">
+                      {session.user.name}
+                    </p>
+                    <p className="text-[11px] text-zinc-500">
+                      {session.user.email}
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="w-full px-4 py-2 text-xs font-semibold text-zinc-800 bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 rounded-md"
+                >
+                  Keluar
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full text-center px-4 py-2 text-xs font-semibold text-zinc-800 bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 rounded-md"
+                >
+                  Masuk
+                </Link>
+
+                <Link
+                  href="/signup"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full text-center px-4 py-2 text-xs font-semibold text-white bg-zinc-900 hover:bg-zinc-800 rounded-md"
+                >
+                  Daftar Akun
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}

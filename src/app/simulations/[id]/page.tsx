@@ -2,8 +2,11 @@ import Link from "next/link";
 import { Sliders } from "lucide-react";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
-import { getSimulationById } from "@/lib/api/simulations";
 import DeleteSimulationButton from "@/components/simulator/DeleteSimulationButton";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth/auth";
+import { getSimulationById } from "@/services/simulation.service";
 
 type SimulationDetailPageProps = {
   params: Promise<{
@@ -13,8 +16,15 @@ type SimulationDetailPageProps = {
 
 export default async function SimulationDetailPage({ params }: SimulationDetailPageProps) {
   const { id } = await params;
-  const respData = await getSimulationById(id);
-  const simulation = respData.simulation;
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    redirect("/login");
+  }
+
+  const simulation = await getSimulationById(id, session.user.id);
   const recommendedScenario = simulation.scenarios.reduce((best, scenario) => {
     return scenario.burdenRatio < best.burdenRatio ? scenario : best;
   });
