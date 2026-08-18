@@ -2,19 +2,10 @@
 
 import { useState } from "react";
 import SearchInput from "./SearchInput";
-import SimulationList from "./SimulationList";
-
-type Simulation = {
-    id: string;
-    simulationName: string;
-    category: string;
-    income: number;
-    expense: number;
-    scenarios: unknown[];
-};
+import SimulationList, { SimulationItem } from "./SimulationList";
 
 type SimulationBrowserProps = {
-    simulations: Simulation[];
+    simulations: SimulationItem[];
 };
 
 export default function SimulationBrowser({
@@ -23,12 +14,7 @@ export default function SimulationBrowser({
     const [search, setSearch] = useState("");
     const [category, setCategory] = useState("Semua");
 
-    const categories = [
-        "Kendaraan",
-        "Properti",
-        "Kredit",
-        "Lainnya",
-    ];
+    const categories = ["Kendaraan", "Properti", "Kredit", "Lainnya"];
 
     const getCategoryCount = (category: string) => {
         return simulations.filter(
@@ -38,13 +24,11 @@ export default function SimulationBrowser({
 
     const filteredSimulations = simulations.filter((simulation) => {
         const matchesCategory =
-            category === "Semua" ||
-            simulation.category === category;
+            category === "Semua" || simulation.category === category;
 
-        const matchesSearch =
-            simulation.simulationName
-                .toLowerCase()
-                .includes(search.toLowerCase());
+        const matchesSearch = simulation.simulationName
+            .toLowerCase()
+            .includes(search.toLowerCase());
 
         return matchesCategory && matchesSearch;
     });
@@ -57,8 +41,8 @@ export default function SimulationBrowser({
                         type="button"
                         onClick={() => setCategory("Semua")}
                         className={`px-3 py-1 rounded font-medium ${category === "Semua"
-                            ? "bg-zinc-900 text-white"
-                            : "bg-white text-zinc-600 border border-zinc-200 hover:text-zinc-900"
+                                ? "bg-zinc-900 text-white"
+                                : "bg-white text-zinc-600 border border-zinc-200 hover:text-zinc-900"
                             }`}
                     >
                         SEMUA ({simulations.length})
@@ -70,8 +54,8 @@ export default function SimulationBrowser({
                             type="button"
                             onClick={() => setCategory(item)}
                             className={`px-3 py-1 rounded transition-colors ${category === item
-                                ? "bg-zinc-900 text-white"
-                                : "bg-white text-zinc-600 border border-zinc-200 hover:text-zinc-900"
+                                    ? "bg-zinc-900 text-white"
+                                    : "bg-white text-zinc-600 border border-zinc-200 hover:text-zinc-900"
                                 }`}
                         >
                             {item.toUpperCase()} ({getCategoryCount(item)})
@@ -80,10 +64,7 @@ export default function SimulationBrowser({
                 </div>
 
                 <div className="w-full md:w-56">
-                    <SearchInput
-                        value={search}
-                        onChange={setSearch}
-                    />
+                    <SearchInput value={search} onChange={setSearch} />
                 </div>
             </div>
 
@@ -101,7 +82,8 @@ export default function SimulationBrowser({
                         </h3>
 
                         <p className="text-xs text-zinc-500 leading-relaxed">
-                            Tidak ada simulasi yang cocok dengan pencarian atau filter yang Anda pilih.
+                            Tidak ada simulasi yang cocok dengan pencarian atau filter yang
+                            Anda pilih.
                         </p>
                     </div>
                 </div>

@@ -25,11 +25,6 @@ export default function LandingPage() {
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
-                <Link href="/simulations">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                    Lihat Contoh Simulasi
-                  </Button>
-                </Link>
               </div>
 
               <div className="pt-4 border-t border-zinc-200/80 flex flex-wrap gap-x-6 gap-y-2 text-xs text-zinc-600 font-medium">

@@ -4,6 +4,7 @@ import {
     updateSimulation,
 } from "@/services/simulation.service";
 import { handleApiError } from "@/lib/api-error";
+import { updateSimulationSchema } from "@/lib/validation";
 
 export async function PATCH(
     request: Request,
@@ -13,9 +14,9 @@ export async function PATCH(
         const { id } = await params;
         const body = await request.json();
 
-        const simulation = await updateSimulation(id, {
-            simulationName: body.simulationName,
-        });
+        const validatedBody = updateSimulationSchema.parse(body);
+
+        const simulation = await updateSimulation(id, validatedBody);
 
         return Response.json({
             message: "Simulation updated",

@@ -87,3 +87,26 @@ export async function calculateSimulation(
 
     return respData;
 }
+
+export async function updateSimulation(
+    id: string,
+    payload: Partial<CreateSimulationPayload>
+): Promise<CreateSimulationResponse> {
+    const resp = await fetch(`http://localhost:3000/api/simulations/${id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+    });
+
+    const respData = await resp.json();
+
+    if (!resp.ok) {
+        throw new Error(
+            respData.message || respData.error || "Gagal memperbarui simulasi"
+        );
+    }
+
+    return respData;
+}

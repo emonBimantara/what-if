@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="space-y-3 md:col-span-2">
             <Link href="/" className="flex items-center gap-2">
               <div className="flex h-7 w-7 items-center justify-center rounded-md bg-zinc-900 text-white font-bold text-xs">
-                W
+                W/I
               </div>
               <span className="text-sm font-bold tracking-tight text-zinc-900">
                 What If<span className="text-emerald-700">?</span>
@@ -31,17 +31,12 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/simulator" className="hover:text-zinc-900 transition-colors">
-                  Simulator Finansial
+                  Simulator
                 </Link>
               </li>
               <li>
                 <Link href="/simulations" className="hover:text-zinc-900 transition-colors">
-                  Daftar Simulasi Saya
-                </Link>
-              </li>
-              <li>
-                <Link href="/simulations/honda-hr-v" className="hover:text-zinc-900 transition-colors">
-                  Contoh Detail Simulasi
+                  Simulasi Saya
                 </Link>
               </li>
             </ul>

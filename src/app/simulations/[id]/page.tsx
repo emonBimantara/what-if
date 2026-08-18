@@ -42,7 +42,7 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
             </div>
 
             <div className="flex items-center gap-2">
-              <Link href="/simulator">
+              <Link href={`/simulator?id=${simulation.id}`}>
                 <Button variant="outline" size="sm" className="h-9 px-3 flex items-center gap-2">
                   <Sliders className="h-4 w-4 shrink-0" />
                   <span>Edit Input</span>
@@ -278,8 +278,8 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
                       <th
                         key={scenario.id}
                         className={`p-3.5 ${isBest
-                            ? "text-emerald-900 bg-emerald-50/60 border-x border-emerald-200"
-                            : "text-zinc-900"
+                          ? "text-emerald-900 bg-emerald-50/60 border-x border-emerald-200"
+                          : "text-zinc-900"
                           }`}
                       >
                         {scenario.name}
@@ -292,11 +292,8 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
 
               <tbody className="divide-y divide-zinc-200 tabular-nums text-zinc-800">
 
-                {/* DP */}
                 <tr>
-                  <td className="p-3.5 font-medium text-zinc-600">
-                    Uang Muka (DP)
-                  </td>
+                  <td className="p-3.5 font-medium text-zinc-600">Uang Muka (DP)</td>
 
                   {simulation.scenarios.map((scenario) => {
                     const isBest = scenario.id === recommendedScenario.id;
@@ -313,9 +310,7 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
                 </tr>
 
                 <tr>
-                  <td className="p-3.5 font-medium text-zinc-600">
-                    Tenor Pembiayaan
-                  </td>
+                  <td className="p-3.5 font-medium text-zinc-600">Tenor Pembiayaan </td>
 
                   {simulation.scenarios.map((scenario) => {
                     const isBest = scenario.id === recommendedScenario.id;
@@ -333,9 +328,7 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
 
                 {/* Cicilan */}
                 <tr>
-                  <td className="p-3.5 font-medium text-zinc-600">
-                    Cicilan / Bulan
-                  </td>
+                  <td className="p-3.5 font-medium text-zinc-600">Cicilan / Bulan</td>
 
                   {simulation.scenarios.map((scenario) => {
                     const isBest = scenario.id === recommendedScenario.id;
@@ -343,10 +336,10 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
                       <td
                         key={scenario.id}
                         className={`p-3.5 font-bold ${scenario.burdenLevel === "HIGH"
-                            ? "text-rose-800"
-                            : scenario.burdenLevel === "MODERATE"
-                              ? "text-amber-800"
-                              : "text-emerald-800"
+                          ? "text-rose-800"
+                          : scenario.burdenLevel === "MODERATE"
+                            ? "text-amber-800"
+                            : "text-emerald-800"
                           } ${isBest ? "bg-emerald-50/40 border-x border-emerald-200" : ""}`}
                       >
                         Rp {Math.round(scenario.monthlyPayment).toLocaleString("id-ID")}
@@ -356,9 +349,7 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
                 </tr>
 
                 <tr>
-                  <td className="p-3.5 font-medium text-zinc-600">
-                    Total Bunga Dibayarkan
-                  </td>
+                  <td className="p-3.5 font-medium text-zinc-600">Total Bunga Dibayarkan</td>
 
                   {simulation.scenarios.map((scenario) => {
                     const isBest = scenario.id === recommendedScenario.id;
@@ -375,9 +366,7 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
                 </tr>
 
                 <tr>
-                  <td className="p-3.5 font-medium text-zinc-600">
-                    Total Pembayaran Aset
-                  </td>
+                  <td className="p-3.5 font-medium text-zinc-600">Total Pembayaran Aset</td>
 
                   {simulation.scenarios.map((scenario) => {
                     const isBest = scenario.id === recommendedScenario.id;
@@ -394,9 +383,7 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
                 </tr>
 
                 <tr>
-                  <td className="p-3.5 font-medium text-zinc-600">
-                    Sisa Cash Flow Bersih
-                  </td>
+                  <td className="p-3.5 font-medium text-zinc-600">Sisa Cash Flow Bersih</td>
 
                   {simulation.scenarios.map((scenario) => {
                     const isBest = scenario.id === recommendedScenario.id;
@@ -414,9 +401,7 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
                 </tr>
 
                 <tr>
-                  <td className="p-3.5 font-medium text-zinc-600">
-                    Rasio Cicilan / Income
-                  </td>
+                  <td className="p-3.5 font-medium text-zinc-600">Rasio Cicilan / Income</td>
 
                   {simulation.scenarios.map((scenario) => {
                     const isBest = scenario.id === recommendedScenario.id;
@@ -424,10 +409,10 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
                       <td
                         key={scenario.id}
                         className={`p-3.5 font-bold ${scenario.burdenLevel === "HIGH"
-                            ? "text-rose-800"
-                            : scenario.burdenLevel === "MODERATE"
-                              ? "text-amber-800"
-                              : "text-emerald-800"
+                          ? "text-rose-800"
+                          : scenario.burdenLevel === "MODERATE"
+                            ? "text-amber-800"
+                            : "text-emerald-800"
                           } ${isBest ? "bg-emerald-50/40 border-x border-emerald-200" : ""}`}
                       >
                         {scenario.burdenRatio.toFixed(2)}%
@@ -437,9 +422,7 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
                 </tr>
 
                 <tr>
-                  <td className="p-3.5 font-medium text-zinc-600">
-                    Level Risiko Finansial
-                  </td>
+                  <td className="p-3.5 font-medium text-zinc-600">Level Risiko Finansial</td>
 
                   {simulation.scenarios.map((scenario) => {
                     const isBest = scenario.id === recommendedScenario.id;

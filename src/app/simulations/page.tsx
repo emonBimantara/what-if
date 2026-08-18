@@ -8,27 +8,11 @@ export default async function SimulationsPage() {
   const respData = await getSimulations()
   const simulations = respData.simulations
 
-  const categories = [
-    "Kendaraan",
-    "Properti",
-    "Kredit",
-    "Lainnya",
-  ];
-
-  const getCategoryCount = (category: string) => {
-    return simulations.filter(
-      (simulation) => simulation.category === category
-    ).length;
-  };
-
   return (
     <div className="py-8 sm:py-12 bg-[#fafaf9] min-h-[calc(100vh-8rem)]">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 space-y-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-200 pb-6">
           <div>
-            <span className="text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-1">
-              WORKSPACE / {simulations.length} SIMULASI TERSIMPAN
-            </span>
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
               Simulasi Saya
             </h1>
