@@ -110,3 +110,21 @@ export async function updateSimulation(
 
     return respData;
 }
+
+export async function deleteSimulation(
+    id: string
+): Promise<{ message: string; simulation: Simulation }> {
+    const resp = await fetch(`http://localhost:3000/api/simulations/${id}`, {
+        method: "DELETE",
+    });
+
+    const respData = await resp.json();
+
+    if (!resp.ok) {
+        throw new Error(
+            respData.message || respData.error || "Gagal menghapus simulasi"
+        );
+    }
+
+    return respData;
+}

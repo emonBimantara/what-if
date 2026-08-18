@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { ArrowLeft, Share2, Download, Sliders } from "lucide-react";
+import { Sliders } from "lucide-react";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
 import { getSimulationById } from "@/lib/api/simulations";
+import DeleteSimulationButton from "@/components/simulator/DeleteSimulationButton";
 
 type SimulationDetailPageProps = {
   params: Promise<{
@@ -41,17 +42,16 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
               </p>
             </div>
 
+            {/* Action Buttons: Edit Input & Hapus Simulasi */}
             <div className="flex items-center gap-2">
               <Link href={`/simulator?id=${simulation.id}`}>
-                <Button variant="outline" size="sm" className="h-9 px-3 flex items-center gap-2">
+                <Button variant="outline" size="sm" className="h-9 px-3 flex items-center gap-2 cursor-pointer">
                   <Sliders className="h-4 w-4 shrink-0" />
-                  <span>Edit Input</span>
+                  <span>Edit</span>
                 </Button>
               </Link>
-              <Button variant="primary" size="sm" className="h-9 px-3 flex items-center gap-2 font-semibold">
-                <Download className="h-4 w-4 shrink-0" />
-                <span>Export PDF</span>
-              </Button>
+
+              <DeleteSimulationButton id={simulation.id} />
             </div>
           </div>
         </div>
@@ -291,7 +291,6 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
               </thead>
 
               <tbody className="divide-y divide-zinc-200 tabular-nums text-zinc-800">
-
                 <tr>
                   <td className="p-3.5 font-medium text-zinc-600">Uang Muka (DP)</td>
 
@@ -326,7 +325,6 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
                   })}
                 </tr>
 
-                {/* Cicilan */}
                 <tr>
                   <td className="p-3.5 font-medium text-zinc-600">Cicilan / Bulan</td>
 
