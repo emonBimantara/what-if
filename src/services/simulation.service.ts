@@ -4,7 +4,7 @@ import { calculateSimulation } from "@/lib/financial";
 import prisma from "@/lib/prisma";
 import type { SimulationType } from "@/lib/validation";
 
-export async function createSimulation(data: SimulationType) {
+export async function createSimulation(data: SimulationType, userId: string) {
     const result = await prisma.$transaction(async (tx) => {
         const simulation = await tx.simulation.create({
             data: {
@@ -12,6 +12,7 @@ export async function createSimulation(data: SimulationType) {
                 expense: data.expense,
                 simulationName: data.simulationName,
                 category: data.category,
+                userId,
             },
         });
 
@@ -36,7 +37,7 @@ export async function createSimulation(data: SimulationType) {
                         monthlyPayment: result.monthlyPayment,
                         remainingCashFlow: result.remainingCashFlow,
                         burdenRatio: result.burdenRatio,
-                        burdenLevel: result.burdenLevel,  
+                        burdenLevel: result.burdenLevel,
                         simulationId: simulation.id,
                     },
                 });
@@ -54,24 +55,32 @@ export async function createSimulation(data: SimulationType) {
     return result;
 }
 
-export async function getSimulations() {
+export async function getSimulations(userId: string) {
     return prisma.simulation.findMany({
+        where: {
+            userId,
+        },
         include: {
-            scenarios: true
-        }
-    })
+            scenarios: true,
+        },
+    });
 }
 
-export async function getSimulationById(id: string) {
+export async function getSimulationById(id: string, userId: string) {
     try {
-        const simulation = await prisma.simulation.findUniqueOrThrow({
+        const simulation = await prisma.simulation.findFirst({
             where: {
                 id,
+                userId
             },
             include: {
                 scenarios: true,
             },
         });
+
+        if (!simulation) {
+            throw new NotFoundError("Simulation not found");
+        }
 
         return simulation;
     } catch (error) {
@@ -88,44 +97,48 @@ export async function getSimulationById(id: string) {
 
 export async function updateSimulation(
     id: string,
+    userId: string,
     data: { simulationName: string }
 ) {
-    try {
-        return await prisma.simulation.update({
-            where: {
-                id,
-            },
-            data: {
-                simulationName: data.simulationName,
-            },
-        });
-    } catch (error) {
-        if (
-            error instanceof Prisma.PrismaClientKnownRequestError &&
-            error.code === "P2025"
-        ) {
-            throw new NotFoundError("Simulation not found");
-        }
+    const simulation = await prisma.simulation.findFirst({
+        where: {
+            id,
+            userId,
+        },
+    });
 
-        throw error;
+    if (!simulation) {
+        throw new NotFoundError("Simulation not found");
     }
+
+    return prisma.simulation.update({
+        where: {
+            id,
+        },
+        data: {
+            simulationName: data.simulationName,
+        },
+    });
 }
 
-export async function deleteSimulation(id: string) {
-    try {
-        return await prisma.simulation.delete({
-            where: {
-                id,
-            },
-        });
-    } catch (error) {
-        if (
-            error instanceof Prisma.PrismaClientKnownRequestError &&
-            error.code === "P2025"
-        ) {
-            throw new NotFoundError("Simulation not found");
-        }
+export async function deleteSimulation(
+    id: string,
+    userId: string
+) {
+    const simulation = await prisma.simulation.findFirst({
+        where: {
+            id,
+            userId,
+        },
+    });
 
-        throw error;
+    if (!simulation) {
+        throw new NotFoundError("Simulation not found");
     }
+
+    return prisma.simulation.delete({
+        where: {
+            id,
+        },
+    });
 }
