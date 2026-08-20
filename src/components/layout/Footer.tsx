@@ -16,11 +16,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-3 md:col-span-2">
             <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-6 w-6 items-center justify-center rounded bg-zinc-900 text-white font-bold text-xs font-mono">
-                W/I
-              </div>
               <span className="text-sm font-bold tracking-tight text-zinc-900">
-                What If<span className="text-emerald-700">?</span>
+                What If<span className="text-emerald-700"> ?</span>
               </span>
             </Link>
             <p className="text-zinc-600 text-xs leading-relaxed max-w-md">

@@ -44,9 +44,6 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-zinc-200/80 bg-[#fafaf9]/95 backdrop-blur-xs">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-15">
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="flex h-7 w-7 items-center justify-center rounded bg-zinc-900 text-white font-bold text-xs tracking-tight shadow-2xs font-mono">
-            W/I
-          </div>
           <div className="flex flex-col">
             <span className="text-sm sm:text-base font-bold tracking-tight text-zinc-900 flex items-center gap-1">
               What If<span className="text-emerald-700 font-bold">?</span>
