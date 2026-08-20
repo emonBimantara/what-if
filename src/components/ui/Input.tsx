@@ -20,28 +20,28 @@ export default function Input({
   const inputId = id || (label ? label.toLowerCase().replace(/\s+/g, "-") : undefined);
 
   return (
-    <div className="flex flex-col gap-1 w-full">
+    <div className="flex flex-col gap-1.5 w-full">
       {label && (
-        <label htmlFor={inputId} className="text-xs font-semibold text-zinc-700">
+        <label htmlFor={inputId} className="text-xs font-medium text-zinc-700 select-none">
           {label}
         </label>
       )}
       <div className="relative flex items-center w-full">
         {prefixText && (
-          <span className="absolute left-3 text-xs font-medium text-zinc-500 select-none pointer-events-none">
+          <span className="absolute left-3 text-xs font-medium text-zinc-400 select-none pointer-events-none font-mono">
             {prefixText}
           </span>
         )}
         <input
           id={inputId}
           type={type}
-          className={`w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-xs sm:text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-800 focus:outline-none focus:ring-1 focus:ring-zinc-800 transition-colors tabular-nums ${
+          className={`w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-xs sm:text-sm text-zinc-900 placeholder:text-zinc-400 hover:border-zinc-300 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 transition-colors tabular-nums ${
             prefixText ? "pl-9" : ""
-          } ${suffixText ? "pr-10" : ""} ${className}`}
+          } ${suffixText ? "pr-12" : ""} ${className}`}
           {...props}
         />
         {suffixText && (
-          <span className="absolute right-3 text-xs font-medium text-zinc-500 select-none pointer-events-none">
+          <span className="absolute right-3 text-xs font-medium text-zinc-400 select-none pointer-events-none font-mono">
             {suffixText}
           </span>
         )}

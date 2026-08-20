@@ -22,15 +22,15 @@ export default function Select({
   const selectId = id || (label ? label.toLowerCase().replace(/\s+/g, "-") : undefined);
 
   return (
-    <div className="flex flex-col gap-1 w-full">
+    <div className="flex flex-col gap-1.5 w-full">
       {label && (
-        <label htmlFor={selectId} className="text-xs font-semibold text-zinc-700">
+        <label htmlFor={selectId} className="text-xs font-medium text-zinc-700 select-none">
           {label}
         </label>
       )}
       <select
         id={selectId}
-        className={`w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-xs sm:text-sm text-zinc-900 focus:border-zinc-800 focus:outline-none focus:ring-1 focus:ring-zinc-800 transition-colors cursor-pointer ${className}`}
+        className={`w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-xs sm:text-sm text-zinc-900 hover:border-zinc-300 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 transition-colors cursor-pointer ${className}`}
         {...props}
       >
         {options.map((opt) => (

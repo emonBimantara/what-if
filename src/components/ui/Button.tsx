@@ -14,19 +14,25 @@ export default function Button({
   type = "button",
   ...props
 }: ButtonProps) {
-  const baseStyles = "inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed rounded-md";
+  const baseStyles =
+    "inline-flex items-center justify-center font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none rounded-md select-none cursor-pointer";
 
   const variants = {
-    primary: "bg-zinc-900 hover:bg-zinc-800 text-white font-semibold shadow-none",
-    secondary: "bg-zinc-100 hover:bg-zinc-200/80 text-zinc-900 border border-zinc-200",
-    outline: "border border-zinc-300 bg-white hover:bg-zinc-100/70 text-zinc-800",
-    ghost: "bg-transparent hover:bg-zinc-100 text-zinc-700 hover:text-zinc-900",
-    danger: "bg-rose-700 hover:bg-rose-800 text-white font-medium",
+    primary:
+      "bg-zinc-900 hover:bg-zinc-800 active:bg-zinc-950 text-white font-medium shadow-sm",
+    secondary:
+      "bg-zinc-100 hover:bg-zinc-200/80 active:bg-zinc-200 text-zinc-900 border border-zinc-200/80",
+    outline:
+      "border border-zinc-200 bg-white hover:bg-zinc-50 hover:border-zinc-300 active:bg-zinc-100 text-zinc-800 shadow-xs",
+    ghost:
+      "bg-transparent hover:bg-zinc-100 active:bg-zinc-200/60 text-zinc-700 hover:text-zinc-900",
+    danger:
+      "bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white font-medium shadow-sm",
   };
 
   const sizes = {
-    sm: "px-3 py-1.5 text-xs gap-1.5",
-    md: "px-4 py-2 text-xs sm:text-sm gap-2",
+    sm: "px-2.5 py-1.5 text-xs gap-1.5",
+    md: "px-3.5 py-2 text-xs sm:text-sm gap-2",
     lg: "px-5 py-2.5 text-sm gap-2.5",
   };
 

@@ -11,12 +11,12 @@ export default function Footer() {
   }
 
   return (
-    <footer className="border-t border-zinc-200 bg-[#f4f4f5] text-zinc-600 text-xs">
+    <footer className="border-t border-zinc-200 bg-zinc-50/80 text-zinc-500 text-xs">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-3 md:col-span-2">
             <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-md bg-zinc-900 text-white font-bold text-xs">
+              <div className="flex h-6 w-6 items-center justify-center rounded bg-zinc-900 text-white font-bold text-xs font-mono">
                 W/I
               </div>
               <span className="text-sm font-bold tracking-tight text-zinc-900">

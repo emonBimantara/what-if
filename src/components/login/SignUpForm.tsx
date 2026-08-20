@@ -66,9 +66,9 @@ export default function SignupForm() {
     }
 
     return (
-        <div className="rounded-lg border border-zinc-200 bg-white p-6 shadow-none space-y-4">
+        <div className="rounded-lg border border-zinc-200 bg-white p-6 sm:p-7 shadow-xs space-y-5">
             {errorMessage && (
-                <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-md">
+                <div className="p-3 bg-rose-50 border border-rose-200 text-rose-800 text-xs rounded-md">
                     {errorMessage}
                 </div>
             )}
@@ -119,7 +119,7 @@ export default function SignupForm() {
                         type="submit"
                         variant="primary"
                         size="md"
-                        className="w-full font-semibold"
+                        className="w-full font-medium"
                         disabled={isLoading}
                     >
                         {isLoading ? (
@@ -137,10 +137,10 @@ export default function SignupForm() {
                 </div>
             </form>
 
-            <div className="pt-4 border-t border-zinc-100 text-center text-xs text-zinc-600">
-                Sudah punya akun?{" "}
+            <div className="pt-4 border-t border-zinc-100 text-center text-xs text-zinc-500">
+                Sudah memiliki akun?{" "}
                 <Link href="/login" className="font-semibold text-zinc-900 hover:underline">
-                    Masuk Akun
+                    Masuk ke Akun
                 </Link>
             </div>
         </div>

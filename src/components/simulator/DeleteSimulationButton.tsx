@@ -32,12 +32,13 @@ export default function DeleteSimulationButton({ id }: { id: string }) {
       type="button"
       onClick={handleDelete}
       disabled={isDeleting}
-      className="h-9 px-3.5 inline-flex items-center justify-center gap-2 rounded-lg bg-red-600 hover:bg-rose-700 active:bg-rose-800 text-white text-xs font-semibold shadow-sm transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+      className="h-9 px-3 inline-flex items-center justify-center gap-1.5 rounded-md border border-zinc-200 bg-white hover:bg-rose-50 hover:border-rose-200 hover:text-rose-700 text-zinc-700 text-xs font-medium transition-colors cursor-pointer disabled:opacity-50 disabled:pointer-events-none shadow-2xs"
+      title="Hapus laporan simulasi ini"
     >
       {isDeleting ? (
-        <Loader2 className="h-4 w-4 animate-spin text-white" />
+        <Loader2 className="h-3.5 w-3.5 animate-spin text-rose-600" />
       ) : (
-        <Trash2 className="h-4 w-4 shrink-0 text-white" />
+        <Trash2 className="h-3.5 w-3.5 shrink-0" />
       )}
       <span>{isDeleting ? "Menghapus..." : "Hapus"}</span>
     </button>

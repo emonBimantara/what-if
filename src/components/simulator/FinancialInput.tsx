@@ -15,12 +15,12 @@ export default function FinancialInput({
 }: FinancialInputProps) {
   return (
     <div className="rounded-lg border border-zinc-200 bg-white p-5 sm:p-6 space-y-4">
-      <div className="pb-3 border-b border-zinc-200">
-        <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-900">
-          SECTION 1 — Kondisi Keuangan Saat Ini
+      <div className="pb-3 border-b border-zinc-100">
+        <h3 className="text-sm font-bold text-zinc-900">
+          Posisi Arus Kas Bulanan
         </h3>
         <p className="text-xs text-zinc-500 mt-0.5">
-          Masukkan gambaran arus kas (cash flow) bulanan Anda.
+          Masukkan gambaran arus kas bulanan Anda untuk menghitung batas aman pembiayaan.
         </p>
       </div>
 

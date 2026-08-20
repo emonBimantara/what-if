@@ -17,8 +17,8 @@ export default async function SignupPage() {
       <div className="w-full max-w-sm space-y-6">
         <div className="text-center space-y-2">
           <Link href="/" className="inline-flex items-center gap-2 mb-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-zinc-900 text-white font-bold text-sm">
-              W
+            <div className="flex h-7 w-7 items-center justify-center rounded bg-zinc-900 text-white font-bold text-xs font-mono">
+              W/I
             </div>
           </Link>
           <h1 className="text-xl font-bold tracking-tight text-zinc-900">Daftar Akun Baru</h1>

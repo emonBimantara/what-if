@@ -35,36 +35,41 @@ export default function SimulationBrowser({
     });
 
     return (
-        <div className="space-y-8">
-            <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 border-b border-zinc-200 pb-4">
-                <div className="flex items-center gap-2 overflow-x-auto text-xs font-mono">
+        <div className="space-y-6">
+            <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 border-b border-zinc-200/80 pb-4">
+                <div className="flex items-center gap-1.5 overflow-x-auto text-xs font-mono pb-1 md:pb-0">
                     <button
                         type="button"
                         onClick={() => setCategory("Semua")}
-                        className={`px-3 py-1 rounded font-medium ${category === "Semua"
-                                ? "bg-zinc-900 text-white"
-                                : "bg-white text-zinc-600 border border-zinc-200 hover:text-zinc-900"
-                            }`}
+                        className={`px-3 py-1.5 rounded-md font-medium transition-colors cursor-pointer ${
+                            category === "Semua"
+                                ? "bg-zinc-900 text-white shadow-2xs font-semibold"
+                                : "bg-white text-zinc-600 border border-zinc-200 hover:text-zinc-900 hover:bg-zinc-50"
+                        }`}
                     >
                         SEMUA ({simulations.length})
                     </button>
 
-                    {categories.map((item) => (
-                        <button
-                            key={item}
-                            type="button"
-                            onClick={() => setCategory(item)}
-                            className={`px-3 py-1 rounded transition-colors ${category === item
-                                    ? "bg-zinc-900 text-white"
-                                    : "bg-white text-zinc-600 border border-zinc-200 hover:text-zinc-900"
+                    {categories.map((item) => {
+                        const count = getCategoryCount(item);
+                        return (
+                            <button
+                                key={item}
+                                type="button"
+                                onClick={() => setCategory(item)}
+                                className={`px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
+                                    category === item
+                                        ? "bg-zinc-900 text-white shadow-2xs font-semibold"
+                                        : "bg-white text-zinc-600 border border-zinc-200 hover:text-zinc-900 hover:bg-zinc-50"
                                 }`}
-                        >
-                            {item.toUpperCase()} ({getCategoryCount(item)})
-                        </button>
-                    ))}
+                            >
+                                {item.toUpperCase()} ({count})
+                            </button>
+                        );
+                    })}
                 </div>
 
-                <div className="w-full md:w-56">
+                <div className="w-full md:w-64">
                     <SearchInput value={search} onChange={setSearch} />
                 </div>
             </div>
@@ -72,21 +77,13 @@ export default function SimulationBrowser({
             {filteredSimulations.length > 0 ? (
                 <SimulationList simulations={filteredSimulations} />
             ) : (
-                <div className="rounded-lg border border-dashed border-zinc-300 bg-white p-8 text-center space-y-3">
-                    <div className="mx-auto h-9 w-9 rounded bg-zinc-100 border border-zinc-200 text-zinc-400 flex items-center justify-center font-mono font-bold text-xs">
-                        X
-                    </div>
-
-                    <div className="space-y-1 max-w-sm mx-auto">
-                        <h3 className="text-sm font-bold text-zinc-900">
-                            Tidak Ada Simulasi Ditemukan
-                        </h3>
-
-                        <p className="text-xs text-zinc-500 leading-relaxed">
-                            Tidak ada simulasi yang cocok dengan pencarian atau filter yang
-                            Anda pilih.
-                        </p>
-                    </div>
+                <div className="rounded-lg border border-dashed border-zinc-300 bg-white p-10 text-center space-y-2">
+                    <h3 className="text-sm font-semibold text-zinc-900">
+                        Tidak ada simulasi yang cocok
+                    </h3>
+                    <p className="text-xs text-zinc-500 max-w-sm mx-auto">
+                        Coba gunakan kata kunci pencarian yang berbeda atau reset filter kategori ke &ldquo;Semua&rdquo;.
+                    </p>
                 </div>
             )}
         </div>

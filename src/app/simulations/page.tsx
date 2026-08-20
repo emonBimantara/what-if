@@ -41,7 +41,7 @@ export default async function SimulationsPage() {
               <Button
                 variant="primary"
                 size="md"
-                className="font-semibold w-full sm:w-auto active:scale-[0.99] transition-transform"
+                className="font-medium w-full sm:w-auto shadow-xs"
               >
                 <Plus className="h-4 w-4" />
                 Simulasi Baru

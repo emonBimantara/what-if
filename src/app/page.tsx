@@ -41,40 +41,51 @@ export default function LandingPage() {
             </div>
 
             <div className="lg:col-span-5">
-              <div className="rounded-lg border border-zinc-300 bg-white p-5 shadow-sm space-y-4 font-mono text-xs relative">
-                <div className="flex items-center justify-between border-b border-zinc-200 pb-2.5">
-                  <span className="font-bold text-zinc-900 tracking-wider text-[11px] uppercase">
-                    [ PREVIEW ]
+              <div className="rounded-lg border border-zinc-200 bg-white p-5 shadow-xs space-y-4 font-mono text-xs">
+                <div className="flex items-center justify-between border-b border-zinc-100 pb-2.5">
+                  <span className="font-semibold text-zinc-900 tracking-wider text-[11px] uppercase">
+                    Sample Worksheet
+                  </span>
+                  <span className="text-[10px] text-zinc-400 font-normal">
+                    Pembelian Mobil
                   </span>
                 </div>
 
                 <div className="space-y-3">
                   <div>
-                    <span className="text-zinc-500 block text-[10px] uppercase">Monthly Income / Free Cashflow</span>
-                    <span className="text-sm font-bold text-zinc-900 tabular-nums">Rp 10.000.000 / Rp 5.000.000</span>
+                    <span className="text-zinc-500 block text-[10px] uppercase font-sans">
+                      Income Bulanan / Free Cash Flow
+                    </span>
+                    <span className="text-sm font-bold text-zinc-900 tabular-nums">
+                      Rp 10.000.000 / Rp 5.000.000
+                    </span>
                   </div>
 
                   <div className="border-t border-dashed border-zinc-200 pt-2.5 space-y-2">
                     <div className="flex justify-between items-center text-[11px]">
-                      <span className="text-zinc-600">SKENARIO B (RECOMMENDED)</span>
-                      <Badge variant="emerald">DP 30%</Badge>
+                      <span className="text-zinc-700 font-semibold">SKENARIO B (REKOMENDASI)</span>
+                      <Badge variant="emerald">DP 30% · 36 Bulan</Badge>
                     </div>
 
-                    <div className="p-2.5 rounded bg-emerald-50/60 border border-emerald-200 space-y-1">
-                      <div className="flex justify-between text-[11px]">
+                    <div className="p-3 rounded bg-emerald-50/50 border border-emerald-200/80 space-y-1.5 font-sans">
+                      <div className="flex justify-between text-xs">
                         <span className="text-zinc-600">Cicilan / Bulan:</span>
-                        <strong className="text-emerald-900 font-bold tabular-nums">Rp 5.210.000</strong>
+                        <strong className="text-emerald-950 font-bold font-mono tabular-nums">
+                          Rp 3.850.000
+                        </strong>
                       </div>
-                      <div className="flex justify-between text-[10px] text-zinc-500">
-                        <span>Dampak Cash Flow:</span>
-                        <span className="text-amber-800 font-semibold tabular-nums">-Rp 210.000</span>
+                      <div className="flex justify-between text-[11px] text-zinc-500">
+                        <span>Sisa Cash Flow Bersih:</span>
+                        <span className="text-emerald-800 font-medium font-mono tabular-nums">
+                          +Rp 1.150.000
+                        </span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="pt-2 border-t border-zinc-200 flex justify-between items-center text-[10px] text-zinc-500">
-                    <span>STATUS RISIKO: MODERAT</span>
-                    <span className="font-bold text-zinc-900">BEBAN: 52.1%</span>
+                  <div className="pt-2 border-t border-zinc-100 flex justify-between items-center text-[10px] text-zinc-500">
+                    <span>STATUS: TERKENDALI</span>
+                    <span className="font-semibold text-zinc-800 font-mono">RASIO: 38.5%</span>
                   </div>
                 </div>
               </div>
@@ -86,33 +97,42 @@ export default function LandingPage() {
       <section className="py-16 bg-[#fafaf9] border-b border-zinc-200">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 space-y-10">
           <div className="space-y-1">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500 font-semibold block">
+              Workflow
+            </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 tracking-tight">
               3 Langkah Membandingkan Masa Depan Finansial
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="space-y-2.5 p-5 rounded-lg border border-zinc-200 bg-white relative">
-              <span className="text-xs font-mono font-bold text-emerald-800 block">01 — POSITION</span>
-              <h3 className="text-base font-bold text-zinc-900">Input Cash Flow</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="space-y-2 p-5 rounded-lg border border-zinc-200 bg-white">
+              <span className="text-xs font-mono font-semibold text-emerald-800 block">
+                01 — CASH FLOW
+              </span>
+              <h3 className="text-base font-bold text-zinc-900">Input Posisi Keuangan</h3>
               <p className="text-xs text-zinc-600 leading-relaxed">
-                Isi total penghasilan rutin bulanan dan pengeluaran tetap saat ini untuk menghitung sisa dana bebas.
+                Isi total penghasilan rutin bulanan dan pengeluaran tetap saat ini untuk menghitung kapasitas arus kas bebas.
               </p>
             </div>
 
-            <div className="space-y-2.5 p-5 rounded-lg border border-zinc-200 bg-white relative">
-              <span className="text-xs font-mono font-bold text-emerald-800 block">02 — VARIATION</span>
-              <h3 className="text-base font-bold text-zinc-900">Buat Skenario</h3>
+            <div className="space-y-2 p-5 rounded-lg border border-zinc-200 bg-white">
+              <span className="text-xs font-mono font-semibold text-emerald-800 block">
+                02 — SKENARIO
+              </span>
+              <h3 className="text-base font-bold text-zinc-900">Buat Variasi Pilihan</h3>
               <p className="text-xs text-zinc-600 leading-relaxed">
-                Tambahkan variasi Uang Muka (DP), tenor cicilan, atau opsi bunga untuk membandingkan skema pembiayaan.
+                Tambahkan variasi Uang Muka (DP), pilihan tenor (12-60 bulan), atau suku bunga per tahun untuk melihat perbedaan cicilan.
               </p>
             </div>
 
-            <div className="space-y-2.5 p-5 rounded-lg border border-zinc-200 bg-white relative">
-              <span className="text-xs font-mono font-bold text-emerald-800 block">03 — REPORT</span>
-              <h3 className="text-base font-bold text-zinc-900">Evaluasi Perbandingan</h3>
+            <div className="space-y-2 p-5 rounded-lg border border-zinc-200 bg-white">
+              <span className="text-xs font-mono font-semibold text-emerald-800 block">
+                03 — MATRIKS
+              </span>
+              <h3 className="text-base font-bold text-zinc-900">Evaluasi Keputusan</h3>
               <p className="text-xs text-zinc-600 leading-relaxed">
-                Lihat rasio beban cicilan, total bunga yang dibayarkan, serta indikator tingkat risiko finansial.
+                Dapatkan rekomendasi skema paling optimal, analisis rasio beban terhadap gaji, dan estimasi surplus/defisit bulanan.
               </p>
             </div>
           </div>
@@ -123,6 +143,9 @@ export default function LandingPage() {
         <div className="mx-auto max-w-5xl px-4 sm:px-6 space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div className="space-y-1">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500 font-semibold block">
+                Use Cases
+              </span>
               <h2 className="text-2xl font-bold text-zinc-900 tracking-tight">
                 Simulasi untuk Berbagai Kebutuhan Finansial
               </h2>
@@ -130,35 +153,43 @@ export default function LandingPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 text-xs">
-            <div className="p-4 rounded border border-zinc-200 bg-[#fafaf9] space-y-2">
-              <span className="text-[10px] font-mono text-zinc-400 block uppercase">CATEG A</span>
-              <h4 className="font-bold text-zinc-900 text-sm">Pembelian Kendaraan</h4>
+            <div className="p-4 rounded-md border border-zinc-200 bg-[#fafaf9] space-y-2">
+              <span className="text-[10px] font-mono text-zinc-400 block uppercase font-medium">
+                Kendaraan
+              </span>
+              <h4 className="font-bold text-zinc-900 text-sm">Mobil & Motor</h4>
               <p className="text-zinc-600 leading-relaxed">
-                Bandingkan skenario beli mobil atau motor dengan variasi DP 20%-50% dan tenor 3 hingga 5 tahun.
+                Bandingkan skenario beli tunai sebagian vs kredit dengan variasi DP 20%-50% dan tenor 3 hingga 5 tahun.
               </p>
             </div>
 
-            <div className="p-4 rounded border border-zinc-200 bg-[#fafaf9] space-y-2">
-              <span className="text-[10px] font-mono text-zinc-400 block uppercase">CATEG B</span>
-              <h4 className="font-bold text-zinc-900 text-sm">KPR Rumah / Properti</h4>
+            <div className="p-4 rounded-md border border-zinc-200 bg-[#fafaf9] space-y-2">
+              <span className="text-[10px] font-mono text-zinc-400 block uppercase font-medium">
+                Properti
+              </span>
+              <h4 className="font-bold text-zinc-900 text-sm">KPR Rumah / Ruko</h4>
               <p className="text-zinc-600 leading-relaxed">
-                Evaluasi komitmen KPR 10, 15, atau 20 tahun terhadap stabilitas keuangan jangka panjang.
+                Evaluasi komitmen cicilan jangka panjang 10, 15, atau 20 tahun terhadap ketahanan cash flow keluarga.
               </p>
             </div>
 
-            <div className="p-4 rounded border border-zinc-200 bg-[#fafaf9] space-y-2">
-              <span className="text-[10px] font-mono text-zinc-400 block uppercase">CATEG C</span>
-              <h4 className="font-bold text-zinc-900 text-sm">Kredit & Pinjaman</h4>
+            <div className="p-4 rounded-md border border-zinc-200 bg-[#fafaf9] space-y-2">
+              <span className="text-[10px] font-mono text-zinc-400 block uppercase font-medium">
+                Pinjaman
+              </span>
+              <h4 className="font-bold text-zinc-900 text-sm">Modal & Usaha</h4>
               <p className="text-zinc-600 leading-relaxed">
-                Kalkulasi batas beban cicilan pinjaman modal usaha atau kredit barang elektronik.
+                Kalkulasi batas aman beban pinjaman modal ekspansi usaha tanpa mengganggu biaya operasional rutin.
               </p>
             </div>
 
-            <div className="p-4 rounded border border-zinc-200 bg-[#fafaf9] space-y-2">
-              <span className="text-[10px] font-mono text-zinc-400 block uppercase">CATEG D</span>
-              <h4 className="font-bold text-zinc-900 text-sm">Keputusan Lainnya</h4>
+            <div className="p-4 rounded-md border border-zinc-200 bg-[#fafaf9] space-y-2">
+              <span className="text-[10px] font-mono text-zinc-400 block uppercase font-medium">
+                Kebutuhan Lain
+              </span>
+              <h4 className="font-bold text-zinc-900 text-sm">Elektronik & Renovasi</h4>
               <p className="text-zinc-600 leading-relaxed">
-                Gunakan simulator untuk dana pendidikan, renovasi rumah, atau investasi bisnis pribadi.
+                Uji dampak pembiayaan renovasi tempat tinggal, alat kerja produktif, atau komitmen kebutuhan lainnya.
               </p>
             </div>
           </div>

@@ -52,9 +52,9 @@ export default function LoginForm() {
     }
 
     return (
-        <div className="rounded-lg border border-zinc-200 bg-white p-6 shadow-none space-y-4">
+        <div className="rounded-lg border border-zinc-200 bg-white p-6 sm:p-7 shadow-xs space-y-5">
             {errorMessage && (
-                <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-md">
+                <div className="p-3 bg-rose-50 border border-rose-200 text-rose-800 text-xs rounded-md">
                     {errorMessage}
                 </div>
             )}
@@ -70,29 +70,22 @@ export default function LoginForm() {
                     required
                 />
 
-                <div className="space-y-1">
-                    <div className="flex items-center justify-between">
-                        <label className="text-xs font-semibold text-zinc-700">Password</label>
-                        <span className="text-[11px] text-zinc-600 hover:underline cursor-pointer">
-                            Lupa Password?
-                        </span>
-                    </div>
-                    <Input
-                        name="password"
-                        type="password"
-                        placeholder="••••••••"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
+                <Input
+                    label="Password"
+                    name="password"
+                    type="password"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
 
                 <div className="pt-2">
                     <Button
                         type="submit"
                         variant="primary"
                         size="md"
-                        className="w-full font-semibold"
+                        className="w-full font-medium"
                         disabled={isLoading}
                     >
                         {isLoading ? (
@@ -102,7 +95,7 @@ export default function LoginForm() {
                             </span>
                         ) : (
                             <>
-                                Masuk
+                                Masuk ke Akun
                                 <ArrowRight className="h-4 w-4" />
                             </>
                         )}
@@ -110,10 +103,10 @@ export default function LoginForm() {
                 </div>
             </form>
 
-            <div className="pt-4 border-t border-zinc-100 text-center text-xs text-zinc-600">
-                Belum punya akun?{" "}
+            <div className="pt-4 border-t border-zinc-100 text-center text-xs text-zinc-500">
+                Belum memiliki akun?{" "}
                 <Link href="/signup" className="font-semibold text-zinc-900 hover:underline">
-                    Daftar Akun
+                    Daftar di sini
                 </Link>
             </div>
         </div>

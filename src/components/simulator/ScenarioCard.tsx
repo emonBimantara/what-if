@@ -28,10 +28,10 @@ export default function ScenarioCard({
   onChange,
 }: ScenarioCardProps) {
   return (
-    <div className="rounded-lg border border-zinc-200 bg-white p-5 sm:p-6 space-y-4">
-      <div className="flex items-center justify-between pb-3 border-b border-zinc-200">
+    <div className="rounded-lg border border-zinc-200 bg-white p-5 sm:p-6 space-y-4 shadow-2xs">
+      <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
         <div className="flex items-center gap-2.5">
-          <span className="flex h-6 w-6 items-center justify-center rounded bg-zinc-900 text-white text-xs font-bold font-mono">
+          <span className="flex h-6 w-6 items-center justify-center rounded bg-zinc-900 text-white text-xs font-bold font-mono select-none">
             {scenarioLetter}
           </span>
           <div>
@@ -48,8 +48,9 @@ export default function ScenarioCard({
           <button
             type="button"
             onClick={onRemove}
-            className="p-1 text-zinc-400 hover:text-rose-600 hover:bg-zinc-100 rounded transition-colors cursor-pointer"
-            title="Hapus Skenario"
+            className="p-1.5 text-zinc-400 hover:text-rose-600 hover:bg-rose-50 rounded-md transition-colors cursor-pointer"
+            title="Hapus Skenario Ini"
+            aria-label={`Hapus Skenario ${scenarioLetter}`}
           >
             <Trash2 className="h-4 w-4" />
           </button>

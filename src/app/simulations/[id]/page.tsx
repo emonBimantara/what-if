@@ -39,8 +39,8 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
     <div className="py-8 sm:py-12 bg-[#fafaf9] min-h-screen">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 space-y-8">
         <div className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-200 pb-6">
-            <div className="space-y-1">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-200/80 pb-6">
+            <div className="space-y-1.5">
               <div className="flex items-center gap-2">
                 <Badge variant="indigo">Kategori: {simulation.category}</Badge>
               </div>
@@ -54,8 +54,8 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
 
             <div className="flex items-center gap-2">
               <Link href={`/simulator?id=${simulation.id}`}>
-                <Button variant="outline" size="sm" className="h-9 px-3 flex items-center gap-2 cursor-pointer">
-                  <Sliders className="h-4 w-4 shrink-0" />
+                <Button variant="outline" size="sm" className="h-9 px-3 flex items-center gap-1.5 cursor-pointer shadow-2xs font-medium">
+                  <Sliders className="h-3.5 w-3.5 shrink-0" />
                   <span>Edit</span>
                 </Button>
               </Link>
@@ -65,17 +65,18 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
           </div>
         </div>
 
-        <div className="rounded-lg border border-emerald-300 bg-emerald-50/40 p-5 sm:p-6 space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-emerald-200 pb-4">
+        {/* PRIMARY RECOMMENDATION BANNER */}
+        <div className="rounded-lg border border-emerald-200 bg-emerald-50/50 p-5 sm:p-6 space-y-4 shadow-2xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-emerald-200/80 pb-4">
             <div>
               <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-800 font-bold block">
                 PRIMARY RECOMMENDATION — {recommendedScenario.name}
               </span>
 
-              <h2 className="text-xl sm:text-2xl font-bold text-emerald-950 mt-0.5">
+              <h2 className="text-lg sm:text-xl font-bold text-emerald-950 mt-0.5">
                 Rekomendasi Skema Pembiayaan (DP{" "}
                 {((recommendedScenario.dp / recommendedScenario.price) * 100).toFixed(0)}%
-                {" / "}
+                {" · "}
                 {recommendedScenario.tenor / 12} Tahun)
               </h2>
             </div>
@@ -87,13 +88,13 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 tabular-nums">
             <div className="space-y-1">
-              <span className="text-xs font-semibold text-emerald-800 uppercase block">
+              <span className="text-[11px] font-semibold text-emerald-800 uppercase tracking-wider block font-mono">
                 RECOMMENDED CICILAN
               </span>
 
               <p className="text-2xl sm:text-3xl font-bold text-emerald-950 font-mono">
                 Rp {recommendedScenario.monthlyPayment.toLocaleString("id-ID", { maximumFractionDigits: 0 })}
-                <span className="text-xs font-normal text-emerald-800">
+                <span className="text-xs font-normal text-emerald-800 ml-1">
                   /bln
                 </span>
               </p>
@@ -103,16 +104,17 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
               </span>
             </div>
 
-            <div className="space-y-1 sm:border-l sm:border-emerald-200 sm:pl-6">
-              <span className="text-xs font-medium text-emerald-800 uppercase block">
-                ESTIMASI DAMPAK CASHFLOW
+            <div className="space-y-1 sm:border-l sm:border-emerald-200/80 sm:pl-6">
+              <span className="text-[11px] font-semibold text-emerald-800 uppercase tracking-wider block font-mono">
+                ESTIMASI DAMPAK CASH FLOW
               </span>
 
               <p
-                className={`text-2xl sm:text-3xl font-bold font-mono ${recommendedScenario.remainingCashFlow < 0
-                  ? "text-amber-900"
-                  : "text-emerald-900"
-                  }`}
+                className={`text-2xl sm:text-3xl font-bold font-mono ${
+                  recommendedScenario.remainingCashFlow < 0
+                    ? "text-rose-900"
+                    : "text-emerald-900"
+                }`}
               >
                 {recommendedScenario.remainingCashFlow < 0 ? "-" : "+"}
                 Rp{" "}
@@ -122,15 +124,15 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
                 </span>
               </p>
 
-              <span className="text-[11px] text-amber-800 block font-mono">
+              <span className="text-[11px] text-emerald-800 block font-mono">
                 {recommendedScenario.remainingCashFlow < 0
                   ? "DEFISIT DARI SISA CASH FLOW"
                   : "SURPLUS DARI SISA CASH FLOW"}
               </span>
             </div>
 
-            <div className="space-y-1 sm:border-l sm:border-emerald-200 sm:pl-6">
-              <span className="text-xs font-medium text-emerald-800 uppercase block">
+            <div className="space-y-1 sm:border-l sm:border-emerald-200/80 sm:pl-6">
+              <span className="text-[11px] font-semibold text-emerald-800 uppercase tracking-wider block font-mono">
                 TOTAL COMMITMENT ASET
               </span>
 
@@ -146,10 +148,16 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
           </div>
         </div>
 
+        {/* SECTION 01 FINANCIAL OVERVIEW */}
         <div className="space-y-3">
-          <span className="text-xs font-mono uppercase tracking-widest text-zinc-500 block">
-            01 — FINANCIAL OVERVIEW (BASELINE CASH FLOW)
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] font-mono font-bold text-zinc-700 bg-zinc-100 px-1.5 py-0.5 rounded border border-zinc-200">
+              01
+            </span>
+            <h2 className="text-xs font-mono uppercase tracking-wider text-zinc-500 font-semibold">
+              FINANCIAL OVERVIEW (BASELINE CASH FLOW)
+            </h2>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 tabular-nums">
             <div className="p-4 rounded-lg border border-zinc-200 bg-white space-y-1">
@@ -178,107 +186,149 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
           </div>
         </div>
 
+        {/* SECTION 02 SCENARIO COMPARISON MATRIX */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-mono uppercase tracking-widest text-zinc-500 block">
-              02 — SCENARIO COMPARISON MATRIX
-            </span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] font-mono font-bold text-zinc-700 bg-zinc-100 px-1.5 py-0.5 rounded border border-zinc-200">
+                02
+              </span>
+              <h2 className="text-xs font-mono uppercase tracking-wider text-zinc-500 font-semibold">
+                SCENARIO COMPARISON MATRIX
+              </h2>
+            </div>
 
             <span className="text-xs text-zinc-500 font-mono">
-              {simulation.scenarios.length} SCENARIOS EVALUATED
+              {simulation.scenarios.length} SKENARIO DIANALISIS
             </span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {simulation.scenarios.map((scenario) => (
-              <div
-                key={scenario.id}
-                className="rounded-lg border border-zinc-200 bg-white p-5 space-y-4 flex flex-col justify-between"
-              >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold font-mono text-zinc-800">{scenario.name} </span>
-                    <Badge variant={burdenVariant[scenario.burdenLevel as keyof typeof burdenVariant]}>
-                      {scenario.burdenLevel}
-                    </Badge>
-                  </div>
+            {simulation.scenarios.map((scenario) => {
+              const isBest = scenario.id === recommendedScenario.id;
 
-                  <div>
-                    <h3 className="text-base font-bold text-zinc-900">
-                      DP Rp {scenario.dp.toLocaleString("id-ID")} · Tenor{" "}
-                      {scenario.tenor} Bulan
-                    </h3>
-                    <p className="text-xs text-zinc-500"> Bunga {scenario.interest}% per tahun</p>
-                  </div>
+              return (
+                <div
+                  key={scenario.id}
+                  className={`rounded-lg border bg-white p-5 space-y-4 flex flex-col justify-between shadow-2xs ${
+                    isBest
+                      ? "border-emerald-300 ring-1 ring-emerald-300/60"
+                      : "border-zinc-200"
+                  }`}
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-xs font-bold font-mono text-zinc-900">
+                          {scenario.name}
+                        </span>
+                        {isBest && (
+                          <span className="text-[10px] text-emerald-800 font-semibold bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+                            Terbaik
+                          </span>
+                        )}
+                      </div>
 
-                  <div className="space-y-2 pt-3 border-t border-zinc-100 text-xs tabular-nums">
-                    <div className="flex justify-between">
-                      <span className="text-zinc-500">Harga Barang:</span>
-                      <span className="text-zinc-900">Rp {scenario.price.toLocaleString("id-ID")}</span>
+                      <Badge variant={burdenVariant[scenario.burdenLevel as keyof typeof burdenVariant]}>
+                        {scenario.burdenLevel}
+                      </Badge>
                     </div>
 
-                    <div className="flex justify-between">
-                      <span className="text-zinc-500">Down Payment:</span>
-                      <span className="text-zinc-900">Rp {scenario.dp.toLocaleString("id-ID")}</span>
-                    </div>
-
-                    <div className="flex justify-between">
-                      <span className="text-zinc-500">Tenor:</span>
-                      <span className="text-zinc-900">{scenario.tenor} Bulan</span>
-                    </div>
-
-                    <div className="flex justify-between">
-                      <span className="text-zinc-500">Bunga:</span>
-                      <span className="text-zinc-900">
-                        {scenario.interest}% / thn
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="p-3 rounded bg-zinc-50 border border-zinc-200 space-y-2 tabular-nums">
                     <div>
-                      <span className="text-[11px] text-zinc-600 block">Cicilan / Bulan</span>
-                      <span className="text-lg font-bold text-zinc-900">
-                        Rp {scenario.monthlyPayment.toLocaleString("id-ID", { maximumFractionDigits: 0 })}
-                      </span>
+                      <h3 className="text-sm sm:text-base font-bold text-zinc-900">
+                        DP Rp {scenario.dp.toLocaleString("id-ID")} · Tenor{" "}
+                        {scenario.tenor} Bulan
+                      </h3>
+                      <p className="text-xs text-zinc-500 mt-0.5">
+                        Bunga {scenario.interest}% per tahun
+                      </p>
                     </div>
 
-                    <div className="pt-2 border-t border-zinc-200 text-[11px] space-y-1">
+                    <div className="space-y-1.5 pt-3 border-t border-zinc-100 text-xs tabular-nums font-mono">
                       <div className="flex justify-between">
-                        <span className="text-zinc-600"> Sisa Cash Flow:</span>
-                        <span className="font-bold text-zinc-900">
-                          Rp {scenario.remainingCashFlow.toLocaleString("id-ID", { maximumFractionDigits: 0 })}
+                        <span className="text-zinc-500 font-sans">Harga Barang:</span>
+                        <span className="text-zinc-900 font-semibold">
+                          Rp {scenario.price.toLocaleString("id-ID")}
                         </span>
                       </div>
 
                       <div className="flex justify-between">
-                        <span className="text-zinc-600">Beban / Income:</span>
-                        <span className="font-bold text-zinc-900">
-                          {scenario.burdenRatio.toFixed(2)}%
+                        <span className="text-zinc-500 font-sans">Down Payment:</span>
+                        <span className="text-zinc-900 font-semibold">
+                          Rp {scenario.dp.toLocaleString("id-ID")}
                         </span>
+                      </div>
+
+                      <div className="flex justify-between">
+                        <span className="text-zinc-500 font-sans">Tenor Pembiayaan:</span>
+                        <span className="text-zinc-900 font-semibold">
+                          {scenario.tenor} Bulan ({scenario.tenor / 12} Thn)
+                        </span>
+                      </div>
+
+                      <div className="flex justify-between">
+                        <span className="text-zinc-500 font-sans">Suku Bunga:</span>
+                        <span className="text-zinc-900 font-semibold">
+                          {scenario.interest}% / thn
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="p-3 rounded-md bg-zinc-50 border border-zinc-200/80 space-y-2 tabular-nums">
+                      <div>
+                        <span className="text-[10px] uppercase font-mono tracking-wider text-zinc-500 block">
+                          Cicilan / Bulan
+                        </span>
+                        <span className="text-base font-bold text-zinc-900 font-mono">
+                          Rp {scenario.monthlyPayment.toLocaleString("id-ID", { maximumFractionDigits: 0 })}
+                        </span>
+                      </div>
+
+                      <div className="pt-2 border-t border-zinc-200/80 text-[11px] space-y-1">
+                        <div className="flex justify-between">
+                          <span className="text-zinc-600">Sisa Cash Flow:</span>
+                          <span className={`font-mono font-semibold ${
+                            scenario.remainingCashFlow < 0 ? "text-rose-700" : "text-emerald-700"
+                          }`}>
+                            {scenario.remainingCashFlow < 0 ? "-" : "+"}Rp{" "}
+                            {Math.abs(scenario.remainingCashFlow).toLocaleString("id-ID", { maximumFractionDigits: 0 })}
+                          </span>
+                        </div>
+
+                        <div className="flex justify-between">
+                          <span className="text-zinc-600">Beban / Income:</span>
+                          <span className="font-mono font-semibold text-zinc-900">
+                            {scenario.burdenRatio.toFixed(2)}%
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="text-[11px] text-zinc-700 bg-zinc-100 p-2.5 rounded border border-zinc-200">
-                  Loan Amount: Rp {scenario.loanAmount.toLocaleString("id-ID")}
+                  <div className="text-[11px] text-zinc-600 bg-zinc-100/80 p-2.5 rounded border border-zinc-200 font-mono">
+                    Pokok Pinjaman: Rp {scenario.loanAmount.toLocaleString("id-ID")}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
-        {/* DETAILED METRIC MATRIX TABLE */}
+        {/* SECTION 03 DETAILED METRIC MATRIX TABLE */}
         <div className="space-y-4 pt-4 border-t border-zinc-200">
-          <span className="text-xs font-mono uppercase tracking-widest text-zinc-500 block">
-            03 — DETAILED METRIC MATRIX TABLE
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] font-mono font-bold text-zinc-700 bg-zinc-100 px-1.5 py-0.5 rounded border border-zinc-200">
+              03
+            </span>
+            <h2 className="text-xs font-mono uppercase tracking-wider text-zinc-500 font-semibold">
+              DETAILED METRIC MATRIX TABLE
+            </h2>
+          </div>
 
-          <div className="rounded-lg border border-zinc-200 bg-white overflow-x-auto shadow-none">
+          <div className="rounded-lg border border-zinc-200 bg-white overflow-x-auto shadow-2xs">
             <table className="w-full text-left border-collapse text-xs sm:text-sm">
               <thead>
-                <tr className="border-b border-zinc-200 bg-zinc-50 text-zinc-900 font-bold">
+                <tr className="border-b border-zinc-200 bg-zinc-50/80 text-zinc-900 font-semibold">
                   <th className="p-3.5">Metrik Finansial</th>
 
                   {simulation.scenarios.map((scenario) => {
@@ -286,13 +336,20 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
                     return (
                       <th
                         key={scenario.id}
-                        className={`p-3.5 ${isBest
-                          ? "text-emerald-900 bg-emerald-50/60 border-x border-emerald-200"
-                          : "text-zinc-900"
-                          }`}
+                        className={`p-3.5 ${
+                          isBest
+                            ? "text-emerald-950 bg-emerald-50/70 border-x border-emerald-200"
+                            : "text-zinc-900"
+                        }`}
                       >
-                        {scenario.name}
-                        {isBest && " ★"}
+                        <div className="flex items-center gap-1">
+                          <span>{scenario.name}</span>
+                          {isBest && (
+                            <span className="text-[10px] text-emerald-800 font-normal">
+                              (Optimal)
+                            </span>
+                          )}
+                        </div>
                       </th>
                     );
                   })}
