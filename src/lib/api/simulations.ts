@@ -1,55 +1,12 @@
-export type Scenario = {
-    id: string;
-    name: string;
-    price: number;
-    dp: number;
-    tenor: number;
-    interest: number;
-    loanAmount: number;
-    totalInterest: number;
-    totalPayment: number;
-    monthlyPayment: number;
-    remainingCashFlow: number;
-    burdenRatio: number;
-    burdenLevel: string;
-    simulationId: string;
-};
-
-export type Simulation = {
-    id: string;
-    income: number;
-    expense: number;
-    simulationName: string;
-    category: string;
-    createdAt: string;
-    scenarios: Scenario[];
-};
-
-export type SimulationDetailResponse = {
-    simulation: Simulation;
-};
-
-export type CreateSimulationPayload = {
-    simulationName: string;
-    category: string;
-    income: number;
-    expense: number;
-    scenarios: {
-        name: string;
-        price: number;
-        dp: number;
-        tenor: number;
-        interest: number;
-    }[];
-};
-
-export type CreateSimulationResponse = {
-    message: string;
-    simulation: Simulation;
-};
+import type {
+    Simulation,
+    SimulationDetailResponse,
+    CreateSimulationPayload,
+    CreateSimulationResponse,
+} from "@/types/simulation";
 
 export async function getSimulations(): Promise<{ simulations: Simulation[] }> {
-    const resp = await fetch("http://localhost:3000/api/simulations");
+    const resp = await fetch(`/api/simulations`);
     if (!resp.ok) {
         throw new Error("Failed to fetch simulations");
     }
@@ -59,7 +16,7 @@ export async function getSimulations(): Promise<{ simulations: Simulation[] }> {
 export async function getSimulationById(
     id: string
 ): Promise<SimulationDetailResponse> {
-    const resp = await fetch(`http://localhost:3000/api/simulations/${id}`);
+    const resp = await fetch(`/api/simulations/${id}`);
     if (!resp.ok) {
         throw new Error("Failed to fetch simulation");
     }
@@ -69,7 +26,7 @@ export async function getSimulationById(
 export async function calculateSimulation(
     payload: CreateSimulationPayload
 ): Promise<CreateSimulationResponse> {
-    const resp = await fetch("http://localhost:3000/api/simulations/calculate", {
+    const resp = await fetch("/api/simulations/calculate", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -92,7 +49,7 @@ export async function updateSimulation(
     id: string,
     payload: Partial<CreateSimulationPayload>
 ): Promise<CreateSimulationResponse> {
-    const resp = await fetch(`http://localhost:3000/api/simulations/${id}`, {
+    const resp = await fetch(`/api/simulations/${id}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
@@ -114,7 +71,7 @@ export async function updateSimulation(
 export async function deleteSimulation(
     id: string
 ): Promise<{ message: string; simulation: Simulation }> {
-    const resp = await fetch(`http://localhost:3000/api/simulations/${id}`, {
+    const resp = await fetch(`/api/simulations/${id}`, {
         method: "DELETE",
     });
 

@@ -2,20 +2,7 @@
 
 import Link from "next/link";
 import { Layers, Calendar, PlusCircle } from "lucide-react";
-
-export type SimulationItem = {
-  id: string;
-  simulationName: string;
-  category: string;
-  income: number;
-  expense: number;
-  createdAt?: string;
-  scenarios: {
-    id: string;
-    name: string;
-    monthlyPayment?: number;
-  }[];
-};
+import type { SimulationItem } from "@/types/simulation";
 
 type SimulationListProps = {
   simulations: SimulationItem[];

@@ -7,7 +7,8 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import Select from "@/components/ui/Select";
 import FinancialInput from "@/components/simulator/FinancialInput";
-import ScenarioCard, { ScenarioFormItem } from "@/components/simulator/ScenarioCard";
+import ScenarioCard from "@/components/simulator/ScenarioCard";
+import type { ScenarioFormItem } from "@/types/simulation";
 import {
   calculateSimulation,
   getSimulationById,

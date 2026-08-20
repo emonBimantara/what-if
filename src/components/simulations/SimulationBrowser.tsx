@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import SearchInput from "./SearchInput";
-import SimulationList, { SimulationItem } from "./SimulationList";
+import SimulationList from "./SimulationList";
+import type { SimulationItem } from "@/types/simulation";
 
 type SimulationBrowserProps = {
     simulations: SimulationItem[];

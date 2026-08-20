@@ -1,14 +1,6 @@
 import Input from "@/components/ui/Input";
 import { Trash2 } from "lucide-react";
-
-export interface ScenarioFormItem {
-  id: string;
-  name: string;
-  price: string;
-  dp: string;
-  tenor: string;
-  interest: string;
-}
+import type { ScenarioFormItem } from "@/types/simulation";
 
 export interface ScenarioCardProps {
   scenarioLetter: string;
