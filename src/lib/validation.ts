@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-export const ageSchema = z.number().nonnegative();
-
 export const scenarioSchema = z.object({
   name: z.string(),
   price: z.number(),
@@ -22,9 +20,10 @@ export const simulationSchema = z.object({
 export type SimulationType = z.infer<typeof simulationSchema>
 
 export const updateSimulationSchema = z.object({
+  income: z.number(),
+  expense: z.number(),
   simulationName: z.string().min(1),
+  category: z.string().min(1),
+  scenarios: z.array(scenarioSchema).min(1),
 });
-
-export type UpdateSimulationType = z.infer<
-  typeof updateSimulationSchema
->;
+export type UpdateSimulationType = z.infer<typeof updateSimulationSchema>;

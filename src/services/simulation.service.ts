@@ -98,7 +98,7 @@ export async function getSimulationById(id: string, userId: string) {
 export async function updateSimulation(
     id: string,
     userId: string,
-    data: { simulationName: string }
+    data: SimulationType
 ) {
     const simulation = await prisma.simulation.findFirst({
         where: {
@@ -111,13 +111,58 @@ export async function updateSimulation(
         throw new NotFoundError("Simulation not found");
     }
 
-    return prisma.simulation.update({
-        where: {
-            id,
-        },
-        data: {
-            simulationName: data.simulationName,
-        },
+    return prisma.$transaction(async (tx) => {
+        const updatedSimulation = await tx.simulation.update({
+            where: {
+                id,
+            },
+            data: {
+                income: data.income,
+                expense: data.expense,
+                simulationName: data.simulationName,
+                category: data.category,
+            },
+        });
+
+        // Hapus scenario lama
+        await tx.scenario.deleteMany({
+            where: {
+                simulationId: id,
+            },
+        });
+
+        // Buat ulang scenario berdasarkan input terbaru
+        await Promise.all(
+            data.scenarios.map(async (scenario) => {
+                const result = calculateSimulation(
+                    data.income,
+                    data.expense,
+                    scenario
+                );
+
+                await tx.scenario.create({
+                    data: {
+                        name: scenario.name,
+                        price: scenario.price,
+                        dp: scenario.dp,
+                        tenor: scenario.tenor,
+                        interest: scenario.interest,
+
+                        loanAmount: result.loanAmount,
+                        totalInterest: result.totalInterest,
+                        totalPayment: result.totalPayment,
+                        monthlyPayment: result.monthlyPayment,
+                        remainingCashFlow: result.remainingCashFlow,
+                        burdenRatio: result.burdenRatio,
+                        burdenLevel: result.burdenLevel,
+
+                        simulationId: id,
+                    },
+                });
+            })
+        );
+
+        return updatedSimulation;
     });
 }
 

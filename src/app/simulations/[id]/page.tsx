@@ -52,7 +52,6 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
               </p>
             </div>
 
-            {/* Action Buttons: Edit Input & Hapus Simulasi */}
             <div className="flex items-center gap-2">
               <Link href={`/simulator?id=${simulation.id}`}>
                 <Button variant="outline" size="sm" className="h-9 px-3 flex items-center gap-2 cursor-pointer">
@@ -82,7 +81,7 @@ export default async function SimulationDetailPage({ params }: SimulationDetailP
             </div>
 
             <Badge variant="emerald">
-              ★ Opsi Paling Optimal
+              Opsi Paling Optimal
             </Badge>
           </div>
 
