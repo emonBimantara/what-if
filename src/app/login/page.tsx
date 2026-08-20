@@ -1,7 +1,18 @@
 import Link from "next/link";
 import LoginForm from "@/components/login/LoginForm";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth/auth";
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (session) {
+    redirect("/simulations");
+  }
+
   return (
     <div className="flex min-h-[calc(100vh-8rem)] items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-[#fafaf9]">
       <div className="w-full max-w-sm space-y-6">

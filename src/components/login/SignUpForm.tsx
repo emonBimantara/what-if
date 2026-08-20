@@ -8,13 +8,15 @@ import Button from "@/components/ui/Button";
 import { authClient } from "@/lib/auth/auth-client";
 import { useRouter } from "next/navigation";
 
-export default function LoginForm() {
+export default function SignupForm() {
     const router = useRouter();
 
     const { data: session, isPending } = authClient.useSession();
 
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -26,17 +28,29 @@ export default function LoginForm() {
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        setIsLoading(true);
         setErrorMessage(null);
 
+        if (password !== confirmPassword) {
+            setErrorMessage("Konfirmasi password tidak cocok.");
+            return;
+        }
+
+        if (password.length < 8) {
+            setErrorMessage("Password minimal harus 8 karakter.");
+            return;
+        }
+
+        setIsLoading(true);
+
         try {
-            const { error } = await authClient.signIn.email({
+            const { error } = await authClient.signUp.email({
+                name,
                 email,
                 password,
             });
 
             if (error) {
-                throw new Error(error.message || "Email atau password salah");
+                throw new Error(error.message || "Gagal mendaftarkan akun");
             }
 
             router.replace("/simulations");
@@ -44,7 +58,7 @@ export default function LoginForm() {
             if (error instanceof Error) {
                 setErrorMessage(error.message);
             } else {
-                setErrorMessage("Gagal masuk ke akun");
+                setErrorMessage("Terjadi kesalahan saat mendaftar");
             }
         } finally {
             setIsLoading(false);
@@ -61,6 +75,16 @@ export default function LoginForm() {
 
             <form onSubmit={handleSubmit} className="space-y-4 font-sans">
                 <Input
+                    label="Nama Lengkap"
+                    name="name"
+                    type="text"
+                    placeholder="Contoh: Budi Santoso"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                />
+
+                <Input
                     label="Alamat Email"
                     name="email"
                     type="email"
@@ -70,22 +94,25 @@ export default function LoginForm() {
                     required
                 />
 
-                <div className="space-y-1">
-                    <div className="flex items-center justify-between">
-                        <label className="text-xs font-semibold text-zinc-700">Password</label>
-                        <span className="text-[11px] text-zinc-600 hover:underline cursor-pointer">
-                            Lupa Password?
-                        </span>
-                    </div>
-                    <Input
-                        name="password"
-                        type="password"
-                        placeholder="••••••••"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
+                <Input
+                    label="Password"
+                    name="password"
+                    type="password"
+                    placeholder="Minimal 8 karakter"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+
+                <Input
+                    label="Konfirmasi Password"
+                    name="confirmPassword"
+                    type="password"
+                    placeholder="Ketik ulang password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                />
 
                 <div className="pt-2">
                     <Button
@@ -98,11 +125,11 @@ export default function LoginForm() {
                         {isLoading ? (
                             <span className="flex items-center gap-1.5">
                                 <Loader2 className="h-4 w-4 animate-spin" />
-                                Memproses...
+                                Mendaftarkan...
                             </span>
                         ) : (
                             <>
-                                Masuk
+                                Buat Akun
                                 <ArrowRight className="h-4 w-4" />
                             </>
                         )}
@@ -111,9 +138,9 @@ export default function LoginForm() {
             </form>
 
             <div className="pt-4 border-t border-zinc-100 text-center text-xs text-zinc-600">
-                Belum punya akun?{" "}
-                <Link href="/signup" className="font-semibold text-zinc-900 hover:underline">
-                    Daftar Akun
+                Sudah punya akun?{" "}
+                <Link href="/login" className="font-semibold text-zinc-900 hover:underline">
+                    Masuk Akun
                 </Link>
             </div>
         </div>
